@@ -9519,8 +9519,7 @@ label sayuri_evento5:
     chi "Nada demais. Só as mesmas dificuldades de sempre."
 
     python:
-        if renpy.android:
-            bao_pontos = PythonSDLActivity.pegaBao()
+        bao_pontos = PythonSDLActivity.pegaBao()
 
     if bao_pontos > 0:
 
@@ -10379,8 +10378,7 @@ label sayuri_evento5:
     s "Você tá precisando fazer um pouco de exercício, [mc]."
 
     python:
-        if renpy.android:
-            mc_fisico = PythonSDLActivity.pegaFpontos()
+        mc_fisico = PythonSDLActivity.pegaFpontos()
 
     if mc_fisico > 4:
 
