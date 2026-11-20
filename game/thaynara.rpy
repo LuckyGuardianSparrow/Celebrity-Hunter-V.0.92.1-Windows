@@ -30,8 +30,7 @@ label thaynara_menu:
 
                 renpy.choice_for_skipping()
 
-                if renpy.android:
-                    thaynara_db = PythonSDLActivity.pegaThaynara()
+                thaynara_db = PythonSDLActivity.pegaThaynara()
 
 
 
@@ -70,8 +69,7 @@ label thaynara_menu:
                 jump thaynara_evento
 
             python:
-                if renpy.android:
-                    cash = PythonSDLActivity.pegaCash()
+                cash = PythonSDLActivity.pegaCash()
 
             "Deixa eu ver aqui."
 
@@ -88,13 +86,24 @@ label thaynara_menu:
                         if thaynara_evento <= 11:
 
                             python:
+                                compra_thaynara_ok = False
                                 if renpy.android:
                                     PythonSDLActivity.addThaynara()
                                     PythonSDLActivity.usaCash(30)
+                                    compra_thaynara_ok = True
+                                else:
+                                    pagamento_thaynara = PythonSDLActivity.usaCash(30)
+                                    if pagamento_thaynara is not False:
+                                        PythonSDLActivity.addThaynara()
+                                        compra_thaynara_ok = True
+                                if compra_thaynara_ok:
+                                    thaynara_evento += 1
 
-                                thaynara_evento += 1
-
-                            jump thaynara_evento
+                            if compra_thaynara_ok:
+                                jump thaynara_evento
+                            else:
+                                "Pagamento nao concluido."
+                                jump call_cidade
                         else:
 
 
