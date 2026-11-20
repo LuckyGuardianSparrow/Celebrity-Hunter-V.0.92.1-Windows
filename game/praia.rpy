@@ -335,8 +335,7 @@ label praia_especial_priscila:
     "Vou comprar um biquini pra ela usar, pagar um bom lanche pra matar a larica, mais algumas bebidas..."
 
     python:
-        if renpy.android:
-            praia_priscila = PythonSDLActivity.pegaPraiaPriscila()
+        praia_priscila = PythonSDLActivity.pegaPraiaPriscila()
 
     "..."
 
@@ -361,8 +360,7 @@ label praia_especial_sayuri:
     "Vou comprar um maiô massa pra ela e garantir uma tarde muito boa..."
 
     python:
-        if renpy.android:
-            praia_sayuri = PythonSDLActivity.pegaPraiaSayuri()
+        praia_sayuri = PythonSDLActivity.pegaPraiaSayuri()
 
     "..."
 
@@ -387,8 +385,7 @@ label praia_especial_julia:
     "Vou comprar um biquini super sexy pra ela e ter um dia que ela não vai esquecer."
 
     python:
-        if renpy.android:
-            praia_julia = PythonSDLActivity.pegaPraiaJulia()
+        praia_julia = PythonSDLActivity.pegaPraiaJulia()
 
     "..."
 
@@ -421,8 +418,7 @@ label praia_especial_diana:
     "A [d] é outro nível. Eu vou comprar um biquíni de marca e uns drinks bem caprichados."
 
     python:
-        if renpy.android:
-            praia_diana = PythonSDLActivity.pegaPraiaDiana()
+        praia_diana = PythonSDLActivity.pegaPraiaDiana()
 
     "..."
 
@@ -455,8 +451,7 @@ label praia_especial_nathan:
     "O [n] é um cara muito bacana. Eu me sinto bem perto dele. Eu quero esquecer todos os rolos e só curtir um dia massa junto com ele."
 
     python:
-        if renpy.android:
-            praia_nathan = PythonSDLActivity.pegaPraiaNathan()
+        praia_nathan = PythonSDLActivity.pegaPraiaNathan()
 
     "..."
 
@@ -483,8 +478,7 @@ label praia_especial_sofia:
     "Mas não custa tentar, né? Ou talvez custe... caralho... que dúvida cruel."
 
     python:
-        if renpy.android:
-            praia_sofia = PythonSDLActivity.pegaPraiaSofia()
+        praia_sofia = PythonSDLActivity.pegaPraiaSofia()
 
     "..."
 
@@ -539,8 +533,7 @@ label praia_especial_natasha:
     "Ver ela de biquíni e todinha pra mim aqui na praia vai ser incrível. Eu preciso disso na minha vida! Urgente!"
 
     python:
-        if renpy.android:
-            praia_natasha = PythonSDLActivity.pegaPraiaNatasha()
+        praia_natasha = PythonSDLActivity.pegaPraiaNatasha()
 
     "..."
 
@@ -583,8 +576,7 @@ label praia_especial_nona:
         "Eu decidi ser só amigo dela. Mas não quer dizer que a gente não pode se divertir juntos na praia."
 
     python:
-        if renpy.android:
-            praia_nona = PythonSDLActivity.pegaPraiaNona()
+        praia_nona = PythonSDLActivity.pegaPraiaNona()
 
     "..."
 
@@ -605,8 +597,7 @@ label praia_especial_grana:
     "Pra fazer o que eu tô pensando, vou precisar de mais ou menos uns {b}C$ 200{/b}"
 
     python:
-        if renpy.android:
-            cash = PythonSDLActivity.pegaCash()
+        cash = PythonSDLActivity.pegaCash()
 
     $ renpy.choice_for_skipping()
 
@@ -619,96 +610,119 @@ label praia_especial_grana:
         "Eu tenho dinheiro suficiente."
 
         python:
-            if renpy.android:
-                praia_priscila = PythonSDLActivity.pegaPraiaPriscila()
+            praia_priscila = PythonSDLActivity.pegaPraiaPriscila()
 
         menu:
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [c]?" if cash >= 200 and praia_escolhida == "priscila" and not praia_priscila:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaPriscila()
+                    compra_ok = PythonSDLActivity.compraPraiaPriscila()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_priscila","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_priscila_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [s]?" if cash >= 200 and praia_escolhida == "sayuri" and not praia_sayuri:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaSayuri()
+                    compra_ok = PythonSDLActivity.compraPraiaSayuri()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_sayuri","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_sayuri_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [g]?" if cash >= 200 and praia_escolhida == "julia" and not praia_julia:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaJulia()
+                    compra_ok = PythonSDLActivity.compraPraiaJulia()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_julia","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_julia_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [d]?" if cash >= 200 and praia_escolhida == "diana" and not praia_diana:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaDiana()
+                    compra_ok = PythonSDLActivity.compraPraiaDiana()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_diana","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_diana_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com o [n]?" if cash >= 200 and praia_escolhida == "nathan" and not praia_nathan:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaNathan()
+                    compra_ok = PythonSDLActivity.compraPraiaNathan()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_nathan","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_nathan_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [w]?" if cash >= 200 and praia_escolhida == "sofia" and not praia_sofia:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaSofia()
+                    compra_ok = PythonSDLActivity.compraPraiaSofia()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_sofia","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_sofia_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [na]?" if cash >= 200 and praia_escolhida == "natasha" and not praia_natasha:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaNatasha()
+                    compra_ok = PythonSDLActivity.compraPraiaNatasha()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_natasha","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_natasha_evento
 
             "Usar {b}C$ 200{/b} para viver o evento na praia com a [h]?" if cash >= 200 and praia_escolhida == "nona" and not praia_nona:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraPraiaNona()
+                    compra_ok = PythonSDLActivity.compraPraiaNona()
+                    if compra_ok is True and renpy.android:
                         PythonSDLActivity.registraEvento("praia_especial_nona","a","a")
-
                     renpy.block_rollback()
+
+                if compra_ok is not True:
+                    "Compra do evento nao concluida."
+                    jump praia_especial_grana
 
                 jump praia_especial_nona_evento
             "Deixar para outra hora":
