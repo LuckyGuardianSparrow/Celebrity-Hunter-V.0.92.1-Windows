@@ -316,8 +316,7 @@ label bao_historia:
             chi "Bom... esse é um assunto delicado."
 
             python:
-                if renpy.android:
-                    bao_pontos = PythonSDLActivity.pegaBao()
+                bao_pontos = PythonSDLActivity.pegaBao()
 
             if bao_pontos >= 5:
 
@@ -455,8 +454,7 @@ label bao_historia:
             chi "..."
 
             python:
-                if renpy.android:
-                    bao_pontos = PythonSDLActivity.pegaBao()
+                bao_pontos = PythonSDLActivity.pegaBao()
 
             if bao_pontos >= 15:
 
@@ -592,8 +590,7 @@ label bao_historia:
             chi "..."
 
             python:
-                if renpy.android:
-                    bao_pontos = PythonSDLActivity.pegaBao()
+                bao_pontos = PythonSDLActivity.pegaBao()
 
             if bao_pontos >= 30:
 
@@ -773,8 +770,7 @@ label bao_historia:
             mc irritado "Eu cansei dessas charadas! Fala logo como eu salvo ela!"
 
             python:
-                if renpy.android:
-                    bao_pontos = PythonSDLActivity.pegaBao()
+                bao_pontos = PythonSDLActivity.pegaBao()
 
             if bao_pontos >= 45:
 
@@ -1402,8 +1398,7 @@ label chinatown_bao:
         $ renpy.choice_for_skipping()
 
         python:
-            if renpy.android:
-                tltempo = PythonSDLActivity.checkTLtempoNext()
+            tltempo = PythonSDLActivity.checkTLtempoNext()
 
         "..."
 
@@ -1427,8 +1422,7 @@ label chinatown_bao:
             p "Ou você pode liberar agora mesmo usando Celebrity Coins."
 
             python:
-                if renpy.android:
-                    persistent.coins = PythonSDLActivity.pegaMoedas(0)
+                persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
             if persistent.coins >= 500:
 
@@ -1439,8 +1433,7 @@ label chinatown_bao:
 
 
                         python:
-                            if renpy.android:
-                                PythonSDLActivity.avancaTLTempo()
+                            PythonSDLActivity.avancaTLTempo()
 
                         $ renpy.block_rollback()
 
@@ -1507,8 +1500,7 @@ label chinatown_bao:
                 PythonSDLActivity.registraEvento("trabalho_lamen","bao","personagem")
 
         python:
-            if renpy.android:
-                PythonSDLActivity.setTLtempoNext()
+            PythonSDLActivity.setTLtempoNext()
 
         chi "Quanto entusiasmo..."
 
@@ -1615,9 +1607,8 @@ label chinatown_bao:
                     $ tl_moral = lamen_certo
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.ganhaCash(tl_cash)
-                            PythonSDLActivity.addBao(tl_moral)
+                        PythonSDLActivity.ganhaCash(tl_cash)
+                        PythonSDLActivity.addBao(tl_moral)
 
                     $ renpy.block_rollback()
 
@@ -3458,8 +3449,7 @@ label chinatown_superior:
                     li "Assim que é bom."
 
                 python:
-                    if renpy.android:
-                        banho_evento_db = PythonSDLActivity.pegaBanho()
+                    banho_evento_db = PythonSDLActivity.pegaBanho()
 
                 if banho_evento < banho_evento_db:
 
@@ -3470,8 +3460,7 @@ label chinatown_superior:
                     jump banho_evento
 
                 python:
-                    if renpy.android:
-                        cash = PythonSDLActivity.pegaCash()
+                    cash = PythonSDLActivity.pegaCash()
 
                 "Eu tô com {b}R$ [cash]{/b}..."
 
@@ -3486,11 +3475,14 @@ label chinatown_superior:
 
 
                             python:
-                                if renpy.android:
-                                    PythonSDLActivity.usaCash(50)
+                                pagamento_banho = PythonSDLActivity.usaCash(50)
+                                if pagamento_banho is not False:
                                     PythonSDLActivity.registraEvento("banho_liling","liling","personagem")
+                                    renpy.block_rollback()
 
-                                renpy.block_rollback()
+                            if pagamento_banho is False:
+                                "Pagamento nao concluido."
+                                jump banho_sair
 
                             mc normal "Aqui tá o dinheiro."
 
@@ -7925,10 +7917,9 @@ label chinatown_superior:
 
 
         python:
-            if renpy.android:
-                banho_evento_db = PythonSDLActivity.pegaBanho()
-                if banho_evento == banho_evento_db:
-                    PythonSDLActivity.addBanho()
+            banho_evento_db = PythonSDLActivity.pegaBanho()
+            if banho_evento == banho_evento_db:
+                PythonSDLActivity.addBanho()
 
             banho_evento += 1
 
