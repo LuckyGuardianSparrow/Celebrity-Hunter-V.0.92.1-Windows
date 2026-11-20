@@ -5242,6 +5242,8 @@ label julia_evento3:
 
     p rindo "Oi! Esta é uma parte bem interessante do game. Por isso queria te dar umas dicas."
 
+###################################################################
+#########################Inicio do xeretar############################
     menu:
         "Por favor me ajude!":
 
@@ -9631,9 +9633,8 @@ label julia_evento4:
         "Deixa eu ver o que eu tenho."
 
         python:
-            if renpy.android:
-                roupa_blacktie = PythonSDLActivity.pegaBlacktie()
-                roupa_blazer = PythonSDLActivity.pegaBlazer()
+            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+            roupa_blazer = PythonSDLActivity.pegaBlazer()
 
         if roupa_blacktie:
 
@@ -9676,8 +9677,7 @@ label julia_evento4:
         scene ape_geral with Dissolve(1.0)
 
         python:
-            if renpy.android:
-                roupa_blazer = PythonSDLActivity.pegaBlazer()
+            roupa_blazer = PythonSDLActivity.pegaBlazer()
 
         "Beleza."
 
@@ -11327,7 +11327,7 @@ label julia_evento4:
             "Sim. Tirar a [g] de cima da mesa de sinuca":
 
 
-                if not caio_negou:
+                if not caio_negou: # trocar para caio_negou == 2 # Cheat Delean
 
                     "Eu prometi pro [caio] que não ia me intrometer nas coisas da [g]."
 
@@ -29756,7 +29756,8 @@ label julia_final2:
                 jump julia_final3_continua
 
     scene black with Dissolve(1.0)
-
+###################################################################
+#########################Fim do xeretar############################
     pause 1.0
 
     scene ape_celular_falando with Dissolve(1.0)
