@@ -2202,9 +2202,8 @@ label fadolandia_exploracao:
         "..."
 
     python:
-        if renpy.android:
-            fadolandia_db = PythonSDLActivity.pegaFadolandia()
-            fadolandia_soma = fadolandia + 1
+        fadolandia_db = PythonSDLActivity.pegaFadolandia()
+        fadolandia_soma = fadolandia + 1
 
     if fadolandia_soma < fadolandia_db:
 
@@ -2229,11 +2228,7 @@ label fadolandia_exploracao:
     call checa_tempo from _call_checa_tempo_1
 
     python:
-        if renpy.android:
-            ftempo = PythonSDLActivity.checkFtempoNext()
-        else:
-            ftempo = True
-
+        ftempo = PythonSDLActivity.checkFtempoNext()
     if not ftempo:
 
         $ proibido_salvar = False
@@ -2252,8 +2247,7 @@ label fadolandia_exploracao:
         "{b}Use o app Relógio no celular do [mc] para ver quando a próxima exploração estará disponível{/b}"
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         "{b}Ou você pode liberar a próxima exploração agora mesmo usando Celebrity Coins{/b}"
 
@@ -2266,8 +2260,7 @@ label fadolandia_exploracao:
 
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaFTempo()
+                        PythonSDLActivity.avancaFTempo()
 
                     $ renpy.block_rollback()
 
@@ -2332,10 +2325,9 @@ label fadolandia_exploracao:
             PythonSDLActivity.registraEvento("pixie_exploracao","pixie","personagem")
 
     python:
-        if renpy.android:
-            PythonSDLActivity.setFtempoNext()
-            fadolandia += 1
-            renpy.block_rollback()
+        PythonSDLActivity.setFtempoNext()
+        fadolandia += 1
+        renpy.block_rollback()
 
     if fado_type == "pixel":
 
