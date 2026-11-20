@@ -2963,7 +2963,7 @@ screen menu_loja():
 
                         text "{b}Preço: R$ 9,90{/b}" size 15
                         text "Acelere seu progresso e complete o álbum de cartas" size 15
-                        imagebutton auto "extra/botao_comprar_%s.png" action Notify("Links externos desativados nesta edicao.")
+                        imagebutton auto "extra/botao_comprar_%s.png" action If(renpy.android, Notify("Links externos desativados nesta edicao."), Function(dm_comprar_coins_windows, 10000))
 
                     vbox:
 
@@ -2978,7 +2978,7 @@ screen menu_loja():
 
                         text "{b}Preço: 4,90{/b}" size 15
                         text "O valor exato para comprar roupas e melhorar o estilo" size 15
-                        imagebutton auto "extra/botao_comprar_%s.png" action Notify("Links externos desativados nesta edicao.")
+                        imagebutton auto "extra/botao_comprar_%s.png" action If(renpy.android, Notify("Links externos desativados nesta edicao."), Function(dm_comprar_cash_windows, 250))
 
                 vbox:
 
@@ -2997,7 +2997,7 @@ screen menu_loja():
 
                         text "{b}Preço: R$ 17,90{/b}" size 15
                         text "Finalmente chegou a hora de curtir a vida adoidado" size 15
-                        imagebutton auto "extra/botao_comprar_%s.png" action Notify("Links externos desativados nesta edicao.")
+                        imagebutton auto "extra/botao_comprar_%s.png" action If(renpy.android, Notify("Links externos desativados nesta edicao."), Function(dm_comprar_cash_windows, 1000))
 
                     vbox:
 
@@ -3012,7 +3012,7 @@ screen menu_loja():
 
                         text "{b}Preço: R$ 29,90{/b}" size 15
                         text "É sua vez de ficar rico e conquistar o mundo!" size 15
-                        imagebutton auto "extra/botao_comprar_%s.png" action Notify("Links externos desativados nesta edicao.")
+                        imagebutton auto "extra/botao_comprar_%s.png" action If(renpy.android, Notify("Links externos desativados nesta edicao."), Function(dm_comprar_cash_windows, 2000))
 
             vbox:
 
