@@ -612,16 +612,17 @@ label karli_aula1:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_1","massagem","aula")
-            
-            if mc_massagem == 0:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_1",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 0:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -1132,16 +1133,17 @@ label karli_aula2:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_2","massagem","aula")
-            
-            if mc_massagem == 1:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_2",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 1:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -1851,16 +1853,17 @@ label karli_aula3:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_3","massagem","aula")
-            
-            if mc_massagem == 2:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_3",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 2:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -2548,16 +2551,17 @@ label karli_aula4:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_4","massagem","aula")
-            
-            if mc_massagem == 3:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_4",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 3:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -3323,16 +3327,17 @@ label karli_aula5:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_5","massagem","aula")
-            
-            if mc_massagem == 4:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_5",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 4:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -3446,16 +3451,17 @@ label karli_aula6:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_6","massagem","aula")
-            
-            if mc_massagem == 5:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_6",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 5:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -4479,8 +4485,7 @@ label karli_aula7:
     mc normal "Claro."
 
     python:
-        if renpy.android:
-            casa = PythonSDLActivity.pegaCasa()
+        casa = PythonSDLActivity.pegaCasa()
 
     if not casa:
 
@@ -4505,8 +4510,7 @@ label karli_aula7:
         gina "O valor pra passar o imóvel para o seu nome é de {b}R$ 2.000{/b}. Essa é a taxa que o cartório cobra. Será seu único custo."
 
         python:
-            if renpy.android:
-                cash = PythonSDLActivity.pegaCash()
+            cash = PythonSDLActivity.pegaCash()
 
         "Realmente, um apartamento desse porte, MEU, por apenas {b}R$ 2.000{/b} é uma oportunidade que poucos têm na vida."
 
@@ -4525,12 +4529,14 @@ label karli_aula7:
 
 
                     python:
-                        if renpy.android:
-                            cash = PythonSDLActivity.pegaCash()
-                            
-                            if cash >= 2000:
-                                
-                                PythonSDLActivity.compraCasa()
+                        cash = PythonSDLActivity.pegaCash()
+                        compra_ok = False
+                        if cash >= 2000:
+                            compra_ok = PythonSDLActivity.compraCasa()
+
+                    if compra_ok is not True:
+                        "Compra do apartamento nao concluida."
+                        jump compra_casa
 
                     $ renpy.block_rollback()
 
@@ -4595,8 +4601,7 @@ label karli_aula7:
 
 
                         python:
-                            if renpy.android:
-                                casa = PythonSDLActivity.pegaCasa()
+                            casa = PythonSDLActivity.pegaCasa()
 
                         gina "Boa tarde, [mc]. Aproveite a casa."
 
@@ -4733,8 +4738,7 @@ label karli_aula7:
         $ k7_continua = True
 
         python:
-            if renpy.android:
-                casa = PythonSDLActivity.pegaCasa()
+            casa = PythonSDLActivity.pegaCasa()
 
         if casa:
 
@@ -5244,16 +5248,17 @@ label karli_aula7:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_7","massagem","aula")
-            
-            if mc_massagem == 6:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_7",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 6:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -6151,16 +6156,17 @@ label karli_e8_bar:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_8","massagem","aula")
-            
-            if mc_massagem == 7:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_8",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 7:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -7442,24 +7448,25 @@ label karli_aula9:
 
         python:
             if renpy.android:
-                
-                PythonSDLActivity.registraEvento("massagem_aula_9","massagem","aula")
-                
-                if mc_massagem == 8:
-                    
-                    if mc_massagem == mc_massagem_db:
-                        mc_massagem_db = PythonSDLActivity.maisMpontos()
-                    
-                    mc_massagem += 1
-
+                PythonSDLActivity.registraEvento(
+                    "massagem_aula_9",
+                    "massagem",
+                    "aula"
+                )
+            else:
+                mc_massagem_db = PythonSDLActivity.pegaMpontos()
+            if mc_massagem == 8:
+                if mc_massagem == mc_massagem_db:
+                    mc_massagem_db = PythonSDLActivity.maisMpontos()
+                mc_massagem = min(10, mc_massagem + 1)
         $ tempo += 1
         $ dia_karli = dia + 1
-
         $ renpy.block_rollback()
 
         play sound "extra/carta.mp3"
 
         "{b}[mc] melhorou sua técnica em massagem{/b}"
+
 
     jump call_cidade
 
@@ -7531,16 +7538,17 @@ label karli_aula10:
 
     python:
         if renpy.android:
-            
-            PythonSDLActivity.registraEvento("massagem_aula_10","massagem","aula")
-            
-            if mc_massagem == 9:
-                
-                if mc_massagem == mc_massagem_db:
-                    mc_massagem_db = PythonSDLActivity.maisMpontos()
-                
-                mc_massagem += 1
-
+            PythonSDLActivity.registraEvento(
+                "massagem_aula_10",
+                "massagem",
+                "aula"
+            )
+        else:
+            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        if mc_massagem == 9:
+            if mc_massagem == mc_massagem_db:
+                mc_massagem_db = PythonSDLActivity.maisMpontos()
+            mc_massagem = min(10, mc_massagem + 1)
     $ tempo += 1
     $ dia_karli = dia + 1
 
@@ -8119,17 +8127,16 @@ label karli_evento1:
     "Mas por hoje tá bom disso. Bora lá."
 
     python:
-        if renpy.android:
             
-            mastempo = PythonSDLActivity.setMtempo()
-            mastemponext = PythonSDLActivity.getMtempoNext()
-            mc_massagem_db = PythonSDLActivity.pegaMpontos()
+        mastempo = PythonSDLActivity.setMtempo()
+        mastemponext = PythonSDLActivity.getMtempoNext()
+        mc_massagem_db = PythonSDLActivity.pegaMpontos()
             
-            if mastempo >= mastemponext:
-                if mc_massagem >= mc_massagem_db:
-                    PythonSDLActivity.setMtempoNext()
+        if mastempo >= mastemponext:
+            if mc_massagem >= mc_massagem_db:
+                PythonSDLActivity.setMtempoNext()
             
-            PythonSDLActivity.registraEvento("massagem_introducao","massagem","aula")
+        PythonSDLActivity.registraEvento("massagem_introducao","massagem","aula")
 
     $ dia_karli = dia + 1
 
