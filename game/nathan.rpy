@@ -9094,9 +9094,8 @@ label nathan_evento6:
     "Ah. Esse evento parece ser mais chique. Eu devia usar uma roupa melhor."
 
     python:
-        if renpy.android:
-            roupa_blazer = PythonSDLActivity.pegaBlazer()
-            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+        roupa_blazer = PythonSDLActivity.pegaBlazer()
+        roupa_blacktie = PythonSDLActivity.pegaBlacktie()
 
     if roupa_blazer:
 
