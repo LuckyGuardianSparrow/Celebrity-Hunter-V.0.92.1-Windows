@@ -10631,8 +10631,7 @@ label sofia_trab:
     "..."
 
     python:
-        if renpy.android:
-            sofia_db = PythonSDLActivity.pegaSofia()
+        sofia_db = PythonSDLActivity.pegaSofia()
 
     if sofia_vez < sofia_db:
 
@@ -10651,8 +10650,7 @@ label sofia_trab:
     call checa_tempo from _call_checa_tempo_2
 
     python:
-        if renpy.android:
-            stempo = PythonSDLActivity.checkStempoNext()
+        stempo = PythonSDLActivity.checkStempoNext()
 
     if not stempo:
 
@@ -10674,8 +10672,7 @@ label sofia_trab:
             p "Use o app Relógio no celular do [mc] para ver quando o próximo trabalho estará disponível."
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         p "Ou você pode liberar o próximo trabalho agora mesmo usando Celebrity Coins."
 
@@ -10691,8 +10688,7 @@ label sofia_trab:
                     $ show_quick_menu = False
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaSTempo()
+                        PythonSDLActivity.avancaSTempo()
 
                     $ renpy.block_rollback()
 
@@ -10759,11 +10755,10 @@ label sofia_trab:
             PythonSDLActivity.registraEvento("trabalho_sofia","pixie","personagem")
 
     python:
-        if renpy.android:
-            PythonSDLActivity.setStempoNext()
-            sofia_vez += 1
-            snext = PythonSDLActivity.pegaSNext()
-            renpy.block_rollback()
+        PythonSDLActivity.setStempoNext()
+        sofia_vez += 1
+        snext = PythonSDLActivity.pegaSNext()
+        renpy.block_rollback()
 
     if sofia_db <= 35:
 
