@@ -111,12 +111,17 @@ label maria_academia_treino:
 
     $ renpy.choice_for_skipping()
 
+    # call checa_tempo from _call_checa_tempo_4
+
+    # python:
+    #     if renpy.android:
+    #         mttempo = PythonSDLActivity.checkMTtempoNext()
+
+    # if not mttempo:
     call checa_tempo from _call_checa_tempo_4
 
     python:
-        if renpy.android:
-            mttempo = PythonSDLActivity.checkMTtempoNext()
-
+        mttempo = PythonSDLActivity.checkMTtempoNext()
     if not mttempo:
 
         $ proibido_salvar = False
@@ -139,8 +144,7 @@ label maria_academia_treino:
             p "Use o app Relógio no celular do [mc] para ver quando o próximo treino estará disponível."
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         p "Ou você pode liberar o próximo treino agora mesmo usando Celebrity Coins."
 
@@ -153,8 +157,7 @@ label maria_academia_treino:
 
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaMTTempo()
+                        PythonSDLActivity.avancaMTTempo()
 
                     $ renpy.block_rollback()
 
@@ -237,10 +240,8 @@ label maria_academia_treino:
             ma "Com certeza."
 
         python:
-            if renpy.android:
-                PythonSDLActivity.setMTtempoNext()
-                
-                renpy.block_rollback()
+            PythonSDLActivity.setMTtempoNext()
+            renpy.block_rollback()
 
     label academia_maria_introducao:
 
@@ -481,12 +482,7 @@ label maria_academia_treino:
     mc "Vamos."
 
     python:
-        if renpy.android:
-            mc_fisico = PythonSDLActivity.pegaFpontos()
-
-        else:
-            
-            mc_fisico = 20
+        mc_fisico = PythonSDLActivity.pegaFpontos()
 
     if maria_academia == 0:
 
@@ -673,8 +669,7 @@ label termina_esteira:
 
 
         python:
-            if renpy.android:
-                PythonSDLActivity.addFCustomPontos(fisico_recompensa)
+            PythonSDLActivity.addFCustomPontos(fisico_recompensa)
 
         $ renpy.block_rollback()
 
@@ -783,8 +778,7 @@ label maria_academia_evento:
 
 
     python:
-        if renpy.android:
-            academia = PythonSDLActivity.pegaAcademia()
+        academia = PythonSDLActivity.pegaAcademia()
 
     if academia:
 
@@ -867,8 +861,7 @@ label maria_academia_evento:
     $ renpy.choice_for_skipping()
 
     python:
-        if renpy.android:
-            cash = PythonSDLActivity.pegaCash()
+        cash = PythonSDLActivity.pegaCash()
 
     "Hmmm... C$ 250..."
 
@@ -883,12 +876,13 @@ label maria_academia_evento:
             "Se tornar membro da academia por {b}C$ 250{/b}" if cash >= 250:
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.compraAcademia()
-                        
-                        academia = PythonSDLActivity.pegaAcademia()
-                        
-                        renpy.choice_for_skipping()
+                    compra_ok = PythonSDLActivity.compraAcademia()
+                    academia = PythonSDLActivity.pegaAcademia()
+                    renpy.choice_for_skipping()
+
+                if compra_ok is not True:
+                    "Pagamento nao concluido."
+                    jump maria_academia_comprar
 
                 mc charmoso "Tá aqui."
 
@@ -1157,13 +1151,20 @@ label maria_treinamento:
 
     $ renpy.choice_for_skipping()
 
+    # call checa_tempo from _call_checa_tempo_5
+
+    # python:
+    #     if renpy.android:
+    #         mttempo = PythonSDLActivity.checkMTtempoNext()
+
+    # $ renpy.pause(delay=1, hard=True)
+
+    # if not mttempo:
     call checa_tempo from _call_checa_tempo_5
 
     python:
-        if renpy.android:
-            mttempo = PythonSDLActivity.checkMTtempoNext()
-
-    $ renpy.pause(delay=1, hard=True)
+        mttempo = PythonSDLActivity.checkMTtempoNext()
+    # Removida a espera artificial de 1 segundo.
 
     if not mttempo:
 
@@ -1181,8 +1182,7 @@ label maria_treinamento:
         "{b}Use o app Relógio no celular do [mc] para ver quando o próximo treino estará disponível{/b}"
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         "{b}Ou você pode liberar o próximo treino agora mesmo usando Celebrity Coins{/b}"
 
@@ -1195,8 +1195,7 @@ label maria_treinamento:
 
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaMTTempo()
+                        PythonSDLActivity.avancaMTTempo()
 
                     $ renpy.block_rollback()
 
@@ -1237,16 +1236,14 @@ label maria_treinamento:
 
 
         python:
-            if renpy.android:
-                PythonSDLActivity.setMTtempoNext()
+            PythonSDLActivity.setMTtempoNext()
 
             renpy.pause(delay=1, hard=True)
 
         if treino_sucesso:
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.addFpontos()
+                PythonSDLActivity.addFpontos()
 
                 renpy.block_rollback()
 
@@ -1946,8 +1943,7 @@ label maria_preparacao:
     $ mc_point = 0.05
 
     python:
-        if renpy.android:
-            mc_fisico = PythonSDLActivity.pegaFpontos()
+        mc_fisico = PythonSDLActivity.pegaFpontos()
 
     $ mc_velocidade = mc_fisico / float(1000)
 
