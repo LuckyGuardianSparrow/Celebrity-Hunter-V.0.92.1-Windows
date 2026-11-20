@@ -9,164 +9,231 @@ init python:
             self._ensure_unlocks()
 
         def _ensure_unlocks(self):
-            self._store.userlogado = True
-            self._store.persistent.apoiador = True
-            self._store.persistent.banned = False
-            if not hasattr(self._store.persistent, "coins"):
-                self._store.persistent.coins = 50
-            if not hasattr(self._store, "cash"):
+            if not hasattr(self._store, "cash") or self._store.cash is None:
                 self._store.cash = 0
-            if not hasattr(self._store, "credito"):
+            try:
+                self._store.cash = max(0, int(self._store.cash))
+            except (TypeError, ValueError, OverflowError):
+                self._store.cash = 0
+            if not hasattr(self._store, "credito") or self._store.credito is None:
+                self._store.credito = 0
+            try:
+                self._store.credito = max(0, int(self._store.credito))
+            except (TypeError, ValueError, OverflowError):
                 self._store.credito = 0
 
         def iniciaVariaveis(self):
             self._ensure_unlocks()
+            return True
 
         def registraEvento(self, *args, **kwargs):
             return None
 
         def abreLogin(self, *args, **kwargs):
-            self._ensure_unlocks()
-            return True
+            return None
 
         def pegaLogado(self, *args, **kwargs):
-            self._ensure_unlocks()
-            return True
-
-        def pegaBacker(self, *args, **kwargs):
-            self._ensure_unlocks()
-            return True
-
-        def pegaBanned(self, *args, **kwargs):
-            self._store.persistent.banned = False
             return False
 
+        def pegaBacker(self, *args, **kwargs):
+            return bool(getattr(self._store.persistent, "apoiador", False))
+
+        def pegaBanned(self, *args, **kwargs):
+            return bool(getattr(self._store.persistent, "banned", False))
+
         def pegaEmail(self, *args, **kwargs):
-            email = getattr(self._store, "useremail", None)
-            if not email:
-                email = "player@offline"
-                self._store.useremail = email
-            return email
+            return "convidado"
 
         def pegaUid(self, *args, **kwargs):
-            uid = getattr(self._store.persistent, "uid", None)
-            if not uid:
-                uid = "offline-uid"
-                self._store.persistent.uid = uid
-            return uid
+            return None
 
         def pegaMoedas(self, *args, **kwargs):
-            return getattr(self._store.persistent, "coins", 0)
+            valor = getattr(self._store.persistent, "coins", 0)
+            try:
+                valor = max(0, int(valor))
+            except (TypeError, ValueError, OverflowError):
+                valor = 0
+            self._store.persistent.coins = valor
+            return valor
 
         def usaMoedas(self, quantidade=0, *args, **kwargs):
-            valor = quantidade or (args[0] if args else 0) or kwargs.get("quantidade", 0)
+            valor = quantidade if quantidade is not None else (args[0] if args else 0)
             try:
                 valor = int(valor)
-            except Exception:
-                valor = 0
-            coins = getattr(self._store.persistent, "coins", 0)
-            if valor > 0:
-                coins = max(0, coins - valor)
-                self._store.persistent.coins = coins
+            except (TypeError, ValueError, OverflowError):
+                return False
+            coins = self.pegaMoedas()
+            if valor < 0 or coins < valor:
+                return False
+            coins -= valor
+            self._store.persistent.coins = coins
+            renpy.save_persistent()
             return coins
 
         def addCoins(self, quantidade=0, *args, **kwargs):
-            valor = quantidade or (args[0] if args else 0) or kwargs.get("quantidade", 0)
+            valor = quantidade if quantidade is not None else (args[0] if args else 0)
             try:
                 valor = int(valor)
-            except Exception:
+            except (TypeError, ValueError, OverflowError):
                 valor = 0
-            coins = getattr(self._store.persistent, "coins", 0) + max(0, valor)
-            self._store.persistent.coins = coins
+            coins = self.pegaMoedas()
+            if valor > 0:
+                coins += valor
+                self._store.persistent.coins = coins
+                renpy.save_persistent()
             return coins
 
         def pegaCredito(self, *args, **kwargs):
-            return getattr(self._store, "credito", 0)
-
-        def addCredito(self, quantidade=0, *args, **kwargs):
-            valor = quantidade or (args[0] if args else 0) or kwargs.get("quantidade", 0)
-            try:
-                valor = int(valor)
-            except Exception:
-                valor = 0
-            credito = getattr(self._store, "credito", 0) + max(0, valor)
-            self._store.credito = credito
-            return credito
-
-        def trocaCredito(self, *args, **kwargs):
-            return self.pegaCredito()
+            self._ensure_unlocks()
+            return self._store.credito
 
         def pegaCreditoTotal(self, *args, **kwargs):
+            try:
+                return max(0, int(getattr(self._store, "credito_total", 0)))
+            except (TypeError, ValueError, OverflowError):
+                return 0
+
+        def addCredito(self, quantidade=0, aposta=0, *args, **kwargs):
+            try:
+                quantidade = int(quantidade)
+                aposta = int(aposta)
+            except (TypeError, ValueError, OverflowError):
+                return False
+            credito = self.pegaCredito()
+            if quantidade < 0 or aposta < 0 or credito < aposta:
+                return False
+            self._store.credito = credito - aposta + quantidade
+            if quantidade:
+                self._store.credito_total = self.pegaCreditoTotal() + quantidade
+            return self._store.credito
+
+        def ganhaCredito(self, quantidade=0, *args, **kwargs):
+            try:
+                quantidade = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                quantidade = 0
+            if quantidade > 0:
+                self._store.credito = self.pegaCredito() + quantidade
+                self._store.credito_total = self.pegaCreditoTotal() + quantidade
             return self.pegaCredito()
 
-        def pegaCash(self, *args, **kwargs):
-            return getattr(self._store, "cash", 0)
-
-        def ganhaCash(self, quantidade=0, *args, **kwargs):
-            valor = quantidade or (args[0] if args else 0) or kwargs.get("quantidade", 0)
+        def usaCredito(self, quantidade=0, *args, **kwargs):
             try:
-                valor = int(valor)
-            except Exception:
-                valor = 0
-            cash = getattr(self._store, "cash", 0) + max(0, valor)
-            self._store.cash = cash
-            return cash
+                quantidade = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                return False
+            credito = self.pegaCredito()
+            if quantidade < 0 or credito < quantidade:
+                return False
+            self._store.credito = credito - quantidade
+            return self._store.credito
 
-        def usaCash(self, quantidade=0, *args, **kwargs):
-            valor = quantidade or (args[0] if args else 0) or kwargs.get("quantidade", 0)
+        def compraCredito(self, quantidade=0, *args, **kwargs):
             try:
-                valor = int(valor)
-            except Exception:
-                valor = 0
-            cash = getattr(self._store, "cash", 0)
-            if valor > 0:
-                cash = max(0, cash - valor)
-                self._store.cash = cash
-            return cash
+                quantidade = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                return False
+            cash = max(0, int(getattr(self._store, "cash", 0)))
+            if quantidade <= 0 or cash < quantidade:
+                return False
+            self._store.cash = cash - quantidade
+            self._store.credito = self.pegaCredito() + quantidade
+            return self._store.credito
 
-        def pegaLivros(self, *args, **kwargs):
-            return 999
-
-        def addLivros(self, *args, **kwargs):
-            return 999
-
-        def pegaGuia1(self, *args, **kwargs):
-            self._store.persistent.guia1 = True
+        def trocaCredito(self, quantidade=0, *args, **kwargs):
+            try:
+                quantidade = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                return False
+            credito = self.pegaCredito()
+            if quantidade <= 0 or credito < quantidade:
+                return False
+            self._store.credito = credito - quantidade
+            self._store.cash = max(0, int(getattr(self._store, "cash", 0))) + quantidade
             return True
 
+        def pegaCash(self, *args, **kwargs):
+            self._ensure_unlocks()
+            return self._store.cash
+
+        def ganhaCash(self, quantidade=0, *args, **kwargs):
+            try:
+                valor = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                valor = 0
+            if valor > 0:
+                self._store.cash = self.pegaCash() + valor
+            return self.pegaCash()
+
+        def usaCash(self, quantidade=0, *args, **kwargs):
+            try:
+                valor = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                return False
+            saldo = self.pegaCash()
+            if valor < 0 or saldo < valor:
+                return False
+            self._store.cash = saldo - valor
+            return self._store.cash
+
+        def pegaLivros(self, *args, **kwargs):
+            return max(0, int(getattr(self._store, "livros_liberados_db", 0)))
+
+        def addLivros(self, *args, **kwargs):
+            if self.pegaLivros() >= 5 or self.usaCash(250) is False:
+                return False
+            self._store.livros_liberados_db = self.pegaLivros() + 1
+            return self._store.livros_liberados_db
+
+        def pegaGuia1(self, *args, **kwargs):
+            return bool(getattr(self._store.persistent, "guia1", False))
+
         def compraGuia1(self, *args, **kwargs):
+            if self.pegaGuia1():
+                return True
+            if self.usaMoedas(300) is False:
+                return False
             self._store.persistent.guia1 = True
+            renpy.save_persistent()
             return True
 
         def pegaFpontos(self, *args, **kwargs):
-            return getattr(self._store, "mc_fisico", 0)
-
-        def addFpontos(self, quantidade=0, *args, **kwargs):
-            valor = quantidade or (args[0] if args else 0) or kwargs.get("quantidade", 0)
             try:
-                valor = int(valor)
-            except Exception:
-                valor = 0
-            pontos = getattr(self._store, "mc_fisico", 0) + max(0, valor)
-            self._store.mc_fisico = pontos
-            return pontos
+                return max(0, int(getattr(self._store, "mc_fisico", 0)))
+            except (TypeError, ValueError, OverflowError):
+                return 0
+
+        def addFpontos(self, quantidade=1, *args, **kwargs):
+            try:
+                quantidade = int(quantidade)
+            except (TypeError, ValueError, OverflowError):
+                quantidade = 0
+            if quantidade < 0:
+                return self.pegaFpontos()
+            self._store.mc_fisico = self.pegaFpontos() + quantidade
+            return self._store.mc_fisico
+
+        def addFCustomPontos(self, quantidade=0, *args, **kwargs):
+            return self.addFpontos(quantidade)
 
         def maisMpontos(self, *args, **kwargs):
-            return 999
+            atual = self.pegaMpontos()
+            self._store.mc_massagem_db = min(10, atual + 1)
+            return self._store.mc_massagem_db
 
         def pegaMpontos(self, *args, **kwargs):
-            return 999
+            atual = max(
+                0,
+                max(0, int(getattr(self._store, "mc_massagem", 0) or 0)),
+                max(0, int(getattr(self._store, "mc_massagem_db", 0) or 0)),
+            )
+            return min(10, atual)
 
-        def loadVID(self, value):
-            if not value:
-                value = "VID-OFFLINE"
-            self._store.persistent.vid = value
-            return value
+        def loadVID(self, *args, **kwargs):
+            return None
 
         def pegaVID(self, *args, **kwargs):
-            vid = self._store.persistent.vid or "VID-OFFLINE"
-            self._store.persistent.vid = vid
-            return vid
+            return None
 
         def loadAD(self, *args, **kwargs):
             return False
@@ -175,7 +242,8 @@ init python:
             return False
 
         def salvaJogo(self, *args, **kwargs):
-            return None
+            self._store.salvado = True
+            return True
 
         def carregaJogo(self, *args, **kwargs):
             return None
@@ -184,13 +252,15 @@ init python:
             return None
 
         def setaSalvado(self, *args, **kwargs):
+            self._store.salvado = True
             return True
 
         def pegaSalvado(self, *args, **kwargs):
-            return True
+            return bool(getattr(self._store, "salvado", True))
 
         def setDaily(self, *args, **kwargs):
             self._store.persistent.daily = True
+            renpy.save_persistent()
             return True
 
         def checkDailyNext(self, *args, **kwargs):
@@ -199,22 +269,44 @@ init python:
         def tempoAgora(self, *args, **kwargs):
             return int(time.time())
 
+        def ganhaCarta(self, carta=None, *args, **kwargs):
+            try:
+                carta = int(carta if carta is not None else (args[0] if args else -1))
+            except (TypeError, ValueError, OverflowError):
+                return False
+            validas = {1, 2, 3, 4, 5} | set(range(501, 511)) | set(range(1001, 1016))
+            if carta not in validas:
+                return False
+            setattr(self._store.persistent, "card_%s" % carta, True)
+            renpy.save_persistent()
+            return True
+
         def __getattr__(self, name):
             if name.startswith("pegaCarta"):
-                return lambda *args, **kwargs: True
-            if name.startswith("ganhaCarta"):
-                return lambda *args, **kwargs: True
-            if name.startswith("compra"):
-                return lambda *args, **kwargs: True
-            if name.startswith("pegaPraia"):
-                return lambda *args, **kwargs: True
-            if name.startswith(("set", "add", "acerta", "avanca", "seta", "mais", "libera", "ganha", "load")):
-                return lambda *args, **kwargs: True
-            if name.startswith("check"):
-                return lambda *args, **kwargs: True
-            if name.startswith("pega"):
-                return lambda *args, **kwargs: True
-            return lambda *args, **kwargs: None
+                sufixo = name[len("pegaCarta"):]
+                validas = {"1", "2", "3", "4", "5"}
+                validas.update(str(valor) for valor in range(501, 511))
+                validas.update(str(valor) for valor in range(1001, 1016))
+                if sufixo in validas:
+                    return lambda *args, **kwargs: bool(getattr(self._store.persistent, "card_%s" % sufixo, False))
+
+            def indisponivel(*args, **kwargs):
+                if name in ("registraEvento", "loadAD", "loadVID", "baixarNuvem", "abreLogin", "carregaJogo", "salvaHist"):
+                    return None
+                if name in (
+                    "checkMtempoNext", "checkMTtempoNext", "checkTBtempoNext",
+                    "checkTLtempoNext", "checkFtempoNext", "checkEPtempoNext",
+                    "checkNtempoNext", "checkStempoNext", "checkMasTempoNext",
+                    "checkTrabalhoTempoNext", "checaTempo",
+                ):
+                    return True
+                try:
+                    if renpy.config.developer:
+                        renpy.log("PythonSDLActivity offline: metodo sem adaptador: %s" % name)
+                except Exception:
+                    pass
+                return False
+            return indisponivel
 
     PythonSDLActivity = _OfflinePythonSDLActivity()
 
@@ -282,206 +374,377 @@ init python:
 
 
 
-image ani01 = Movie(play="ani01.webm")
-image ani02 = Movie(play="ani02.webm")
-image ani03 = Movie(play="ani03.webm")
-image ani04 = Movie(play="ani04.webm")
-image ani05 = Movie(play="ani05.webm")
-image ani06 = Movie(play="ani06.webm")
-image ani07 = Movie(play="ani07.webm")
-image ani08 = Movie(play="ani08.webm")
-image ani09 = Movie(play="ani09.webm")
-image ani10 = Movie(play="ani10.webm")
-image ani11 = Movie(play="ani11.webm")
-image ani12 = Movie(play="ani12.webm")
-image ani13 = Movie(play="ani13.webm")
-image ani14 = Movie(play="ani14.webm")
-image ani15 = Movie(play="ani15.webm")
-image ani16 = Movie(play="ani16.webm")
-image ani17 = Movie(play="ani17.webm")
-image ani18 = Movie(play="ani18.webm")
-image ani19 = Movie(play="ani19.webm")
-image ani20 = Movie(play="ani20.webm")
-image ani21 = Movie(play="ani21.webm")
+# image ani01 = Movie(play="ani01.webm")
+image ani01 = Movie(channel="dm_ani01", play="images/ani01.webm", size=(1280, 720))
+# image ani02 = Movie(play="ani02.webm")
+image ani02 = Movie(channel="dm_ani02", play="images/ani02.webm", size=(1280, 720))
+# image ani03 = Movie(play="ani03.webm")
+image ani03 = Movie(channel="dm_ani03", play="images/ani03.webm", size=(1280, 720))
+# image ani04 = Movie(play="ani04.webm")
+image ani04 = Movie(channel="dm_ani04", play="images/ani04.webm", size=(1280, 720))
+# image ani05 = Movie(play="ani05.webm")
+image ani05 = Movie(channel="dm_ani05", play="images/ani05.webm", size=(1280, 720))
+# image ani06 = Movie(play="ani06.webm")
+image ani06 = Movie(channel="dm_ani06", play="images/ani06.webm", size=(1280, 720))
+# image ani07 = Movie(play="ani07.webm")
+image ani07 = Movie(channel="dm_ani07", play="images/ani07.webm", size=(1280, 720))
+# image ani08 = Movie(play="ani08.webm")
+image ani08 = Movie(channel="dm_ani08", play="images/ani08.webm", size=(1280, 720))
+# image ani09 = Movie(play="ani09.webm")
+image ani09 = Movie(channel="dm_ani09", play="images/ani09.webm", size=(1280, 720))
+# image ani10 = Movie(play="ani10.webm")
+image ani10 = Movie(channel="dm_ani10", play="images/ani10.webm", size=(1280, 720))
+# image ani11 = Movie(play="ani11.webm")
+image ani11 = Movie(channel="dm_ani11",play="images/ani11.webm",size=(1280, 720))
+# image ani12 = Movie(play="ani12.webm")
+image ani12 = Movie(channel="dm_ani12",play="images/ani12.webm",size=(1280, 720))
+# image ani13 = Movie(play="ani13.webm")
+image ani13 = Movie(channel="dm_ani13",play="images/ani13.webm",size=(1280, 720))
+# image ani14 = Movie(play="ani14.webm")
+image ani14 = Movie(channel="dm_ani14", play="images/ani14.webm", size=(1280, 720))
+# image ani15 = Movie(play="ani15.webm")
+image ani15 = Movie(channel="dm_ani15", play="images/ani15.webm", size=(1280, 720))
+# image ani16 = Movie(play="ani16.webm")
+image ani16 = Movie(channel="dm_ani16", play="images/ani16.webm", size=(1280, 720))
+# image ani17 = Movie(play="ani17.webm")
+image ani17 = Movie(channel="dm_ani17", play="images/ani17.webm", size=(1280, 720))
+# image ani18 = Movie(play="ani18.webm")
+image ani18 = Movie(channel="dm_ani18", play="images/ani18.webm", size=(1280, 720))
+# image ani19 = Movie(play="ani19.webm")
+image ani19 = Movie(channel="dm_ani19", play="images/ani19.webm", size=(1280, 720))
+# image ani20 = Movie(play="ani20.webm")
+image ani20 = Movie(channel="dm_ani20", play="images/ani20.webm", size=(1280, 720))
+# image ani21 = Movie(play="ani21.webm")
+image ani21 = Movie(channel="dm_ani21", play="images/ani21.webm", size=(1280, 720))
 
-image n8i49 = Movie(play="n8_ani1.webm")
-image n8i50 = Movie(play="n8_ani2.webm")
-image n8i69 = Movie(play="ani25.webm")
-image n8i71 = Movie(play="ani22.webm")
-image n8i72 = Movie(play="ani23.webm")
+# image n8i49 = Movie(play="n8_ani1.webm")
+image n8i49 = Movie(channel="dm_n8i49", play="images/n8_ani1.webm", size=(1280, 720))
+# image n8i50 = Movie(play="n8_ani2.webm")
+image n8i50 = Movie(channel="dm_n8i50", play="images/n8_ani2.webm", size=(1280, 720))
+# image n8i69 = Movie(play="ani25.webm")
+image n8i69 = Movie(channel="dm_n8i69", play="images/ani25.webm", size=(1280, 720))
+# image n8i71 = Movie(play="ani22.webm")
+image n8i71 = Movie(channel="dm_n8i71", play="images/ani22.webm", size=(1280, 720))
+# image n8i72 = Movie(play="ani23.webm")
+image n8i72 = Movie(channel="dm_n8i72", play="images/ani23.webm", size=(1280, 720))
 
 
 
-image ani22 = Movie(play="/images/ani/ch_ani22.webm")
-image ani23 = Movie(play="/images/ani/ch_ani23.webm")
-image ani24 = Movie(play="/images/ani/ch_ani24.webm")
-image ani25 = Movie(play="/images/ani/ch_ani25.webm")
-image ani26 = Movie(play="/images/ani/ch_ani26.webm")
-image ani27 = Movie(play="/images/ani/ch_ani27.webm")
-image ani28 = Movie(play="/images/ani/ch_ani28.webm")
-image ani29 = Movie(play="/images/ani/ch_ani29.webm")
-image ani30 = Movie(play="/images/ani/ch_ani30.webm")
-image ani31 = Movie(play="/images/ani/ch_ani31.webm")
-image ani32 = Movie(play="/images/ani/ch_ani32.webm")
-image ani33 = Movie(play="/images/ani/ch_ani33.webm")
-image ani34 = Movie(play="/images/ani/ch_ani34.webm")
-image ani35 = Movie(play="/images/ani/ch_ani35.webm")
-image ani36 = Movie(play="/images/ani/ch_ani36.webm")
-image ani37 = Movie(play="/images/ani/ch_ani37.webm")
-image ani38 = Movie(play="/images/ani/ch_ani38.webm")
-image ani39 = Movie(play="/images/ani/ch_ani39.webm")
-image ani40 = Movie(play="/images/ani/ch_ani40.webm")
-image ani41 = Movie(play="/images/ani/ch_ani41.webm")
-image ani42 = Movie(play="/images/ani/ch_ani42.webm")
-image ani43 = Movie(play="/images/ani/ch_ani43.webm")
-image ani44 = Movie(play="/images/ani/ch_ani44.webm")
-image ani45 = Movie(play="/images/ani/ch_ani45.webm")
-image ani46 = Movie(play="/images/ani/ch_ani46.webm")
-image ani47 = Movie(play="/images/ani/ch_ani47.webm")
-image ani48 = Movie(play="/images/ani/ch_ani48.webm")
-image ani49 = Movie(play="/images/ani/ch_ani49.webm")
-image ani50 = Movie(play="/images/ani/ch_ani50.webm")
+# image ani22 = Movie(play="/images/ani/ch_ani22.webm")
+image ani22 = Movie(channel="dm_ani22", play="images/ani/ch_ani22.webm", size=(1280, 720))
+# image ani23 = Movie(play="/images/ani/ch_ani23.webm")
+image ani23 = Movie(channel="dm_ani23", play="images/ani/ch_ani23.webm", size=(1280, 720))
+# image ani24 = Movie(play="/images/ani/ch_ani24.webm")
+image ani24 = Movie(channel="dm_ani24", play="images/ani/ch_ani24.webm", size=(1280, 720))
+# image ani25 = Movie(play="/images/ani/ch_ani25.webm")
+image ani25 = Movie(channel="dm_ani25", play="images/ani/ch_ani25.webm", size=(1280, 720))
+# image ani26 = Movie(play="/images/ani/ch_ani26.webm")
+image ani26 = Movie(channel="dm_ani26", play="images/ani/ch_ani26.webm", size=(1280, 720))
+# image ani27 = Movie(play="/images/ani/ch_ani27.webm")
+image ani27 = Movie(channel="dm_ani27", play="images/ani/ch_ani27.webm", size=(1280, 720))
+# image ani28 = Movie(play="/images/ani/ch_ani28.webm")
+image ani28 = Movie(channel="dm_ani28", play="images/ani/ch_ani28.webm", size=(1280, 720))
+# image ani29 = Movie(play="/images/ani/ch_ani29.webm")
+image ani29 = Movie(channel="dm_ani29", play="images/ani/ch_ani29.webm", size=(1280, 720))
+# image ani30 = Movie(play="/images/ani/ch_ani30.webm")
+image ani30 = Movie(channel="dm_ani30", play="images/ani/ch_ani30.webm", size=(1280, 720))
+# image ani31 = Movie(play="/images/ani/ch_ani31.webm")
+image ani31 = Movie(channel="dm_ani31", play="images/ani/ch_ani31.webm", size=(1280, 720))
+# image ani32 = Movie(play="/images/ani/ch_ani32.webm")
+image ani32 = Movie(channel="dm_ani32", play="images/ani/ch_ani32.webm", size=(1280, 720))
+# image ani33 = Movie(play="/images/ani/ch_ani33.webm")
+image ani33 = Movie(channel="dm_ani33", play="images/ani/ch_ani33.webm", size=(1280, 720))
+# image ani34 = Movie(play="/images/ani/ch_ani34.webm")
+image ani34 = Movie(channel="dm_ani34", play="images/ani/ch_ani34.webm", size=(1280, 720))
+# image ani35 = Movie(play="/images/ani/ch_ani35.webm")
+image ani35 = Movie(channel="dm_ani35", play="images/ani/ch_ani35.webm", size=(1280, 720))
+# image ani36 = Movie(play="/images/ani/ch_ani36.webm")
+image ani36 = Movie(channel="dm_ani36", play="images/ani/ch_ani36.webm", size=(1280, 720))
+# image ani37 = Movie(play="/images/ani/ch_ani37.webm")
+image ani37 = Movie(channel="dm_ani37", play="images/ani/ch_ani37.webm", size=(1280, 720))
+# image ani38 = Movie(play="/images/ani/ch_ani38.webm")
+image ani38 = Movie(channel="dm_ani38", play="images/ani/ch_ani38.webm", size=(1280, 720))
+# image ani39 = Movie(play="/images/ani/ch_ani39.webm")
+image ani39 = Movie(channel="dm_ani39", play="images/ani/ch_ani39.webm", size=(1280, 720))
+# image ani40 = Movie(play="/images/ani/ch_ani40.webm")
+image ani40 = Movie(channel="dm_ani40", play="images/ani/ch_ani40.webm", size=(1280, 720))
+# image ani41 = Movie(play="/images/ani/ch_ani41.webm")
+image ani41 = Movie(channel="dm_ani41", play="images/ani/ch_ani41.webm", size=(1280, 720))
+# image ani42 = Movie(play="/images/ani/ch_ani42.webm")
+image ani42 = Movie(channel="dm_ani42", play="images/ani/ch_ani42.webm", size=(1280, 720))
+# image ani43 = Movie(play="/images/ani/ch_ani43.webm")
+image ani43 = Movie(channel="dm_ani43", play="images/ani/ch_ani43.webm", size=(1280, 720))
+# image ani44 = Movie(play="/images/ani/ch_ani44.webm")
+image ani44 = Movie(channel="dm_ani44", play="images/ani/ch_ani44.webm", size=(1280, 720))
+# image ani45 = Movie(play="/images/ani/ch_ani45.webm")
+image ani45 = Movie(channel="dm_ani45", play="images/ani/ch_ani45.webm", size=(1280, 720))
+# image ani46 = Movie(play="/images/ani/ch_ani46.webm")
+image ani46 = Movie(channel="dm_ani46", play="images/ani/ch_ani46.webm", size=(1280, 720))
+# image ani47 = Movie(play="/images/ani/ch_ani47.webm")
+image ani47 = Movie(channel="dm_ani47", play="images/ani/ch_ani47.webm", size=(1280, 720))
+# image ani48 = Movie(play="/images/ani/ch_ani48.webm")
+image ani48 = Movie(channel="dm_ani48", play="images/ani/ch_ani48.webm", size=(1280, 720))
+# image ani49 = Movie(play="/images/ani/ch_ani49.webm")
+image ani49 = Movie(channel="dm_ani49", play="images/ani/ch_ani49.webm", size=(1280, 720))
+# image ani50 = Movie(play="/images/ani/ch_ani50.webm")
+image ani50 = Movie(channel="dm_ani50", play="images/ani/ch_ani50.webm", size=(1280, 720))
 
-image dnew_ani01 = Movie(play="images/new/diana/dnew_ani01.webm", size = (1280, 720))
-image dnew_ani02 = Movie(play="images/new/diana/dnew_ani02.webm", size = (1280, 720))
-image dnew_ani03 = Movie(play="images/new/diana/dnew_ani03.webm", size = (1280, 720))
-image dnew_ani04 = Movie(play="images/new/diana/dnew_ani04.webm", size = (1280, 720))
-image dnew_ani05 = Movie(play="images/new/diana/dnew_ani05.webm", size = (1280, 720))
-image dnew_ani06 = Movie(play="images/new/diana/dnew_ani06.webm", size = (1280, 720))
-image dnew_ani07 = Movie(play="images/new/diana/dnew_ani07.webm", size = (1280, 720))
-image dnew_ani08 = Movie(play="images/new/diana/dnew_ani08.webm", size = (1280, 720))
-image dnew_ani09 = Movie(play="images/new/diana/dnew_ani09.webm", size = (1280, 720))
-image dnew_ani10 = Movie(play="images/new/diana/dnew_ani10.webm", size = (1280, 720))
-image dnew_ani11 = Movie(play="images/new/diana/dnew_ani11.webm", size = (1280, 720))
-image dnew_ani12 = Movie(play="images/new/diana/dnew_ani12.webm", size = (1280, 720))
-image dnew_ani13 = Movie(play="images/new/diana/dnew_ani13.webm", size = (1280, 720))
-image dnew_ani14 = Movie(play="images/new/diana/dnew_ani14.webm", size = (1280, 720))
-image dnew_ani15 = Movie(play="images/new/diana/dnew_ani15.webm", size = (1280, 720))
-image dnew_ani16 = Movie(play="images/new/diana/dnew_ani16.webm", size = (1280, 720))
-image dnew_ani17 = Movie(play="images/new/diana/dnew_ani17.webm", size = (1280, 720))
-image dnew_ani18 = Movie(play="images/new/diana/dnew_ani18.webm", size = (1280, 720))
+# image dnew_ani01 = Movie(play="images/new/diana/dnew_ani01.webm", size = (1280, 720))
+image dnew_ani01 = Movie(channel="dm_dnew_ani01", play="images/new/diana/dnew_ani01.webm", size=(1280, 720))
+# image dnew_ani02 = Movie(play="images/new/diana/dnew_ani02.webm", size = (1280, 720))
+image dnew_ani02 = Movie(channel="dm_dnew_ani02", play="images/new/diana/dnew_ani02.webm", size=(1280, 720))
+# image dnew_ani03 = Movie(play="images/new/diana/dnew_ani03.webm", size = (1280, 720))
+image dnew_ani03 = Movie(channel="dm_dnew_ani03", play="images/new/diana/dnew_ani03.webm", size=(1280, 720))
+# image dnew_ani04 = Movie(play="images/new/diana/dnew_ani04.webm", size = (1280, 720))
+image dnew_ani04 = Movie(channel="dm_dnew_ani04", play="images/new/diana/dnew_ani04.webm", size=(1280, 720))
+# image dnew_ani05 = Movie(play="images/new/diana/dnew_ani05.webm", size = (1280, 720))
+image dnew_ani05 = Movie(channel="dm_dnew_ani05", play="images/new/diana/dnew_ani05.webm", size=(1280, 720))
+# image dnew_ani06 = Movie(play="images/new/diana/dnew_ani06.webm", size = (1280, 720))
+image dnew_ani06 = Movie(channel="dm_dnew_ani06", play="images/new/diana/dnew_ani06.webm", size=(1280, 720))
+# image dnew_ani07 = Movie(play="images/new/diana/dnew_ani07.webm", size = (1280, 720))
+image dnew_ani07 = Movie(channel="dm_dnew_ani07", play="images/new/diana/dnew_ani07.webm", size=(1280, 720))
+# image dnew_ani08 = Movie(play="images/new/diana/dnew_ani08.webm", size = (1280, 720))
+image dnew_ani08 = Movie(channel="dm_dnew_ani08", play="images/new/diana/dnew_ani08.webm", size=(1280, 720))
+# image dnew_ani09 = Movie(play="images/new/diana/dnew_ani09.webm", size = (1280, 720))
+image dnew_ani09 = Movie(channel="dm_dnew_ani09", play="images/new/diana/dnew_ani09.webm", size=(1280, 720))
+# image dnew_ani10 = Movie(play="images/new/diana/dnew_ani10.webm", size = (1280, 720))
+image dnew_ani10 = Movie(channel="dm_dnew_ani10", play="images/new/diana/dnew_ani10.webm", size=(1280, 720))
+# image dnew_ani11 = Movie(play="images/new/diana/dnew_ani11.webm", size = (1280, 720))
+image dnew_ani11 = Movie(channel="dm_dnew_ani11", play="images/new/diana/dnew_ani11.webm", size=(1280, 720))
+# image dnew_ani12 = Movie(play="images/new/diana/dnew_ani12.webm", size = (1280, 720))
+image dnew_ani12 = Movie(channel="dm_dnew_ani12", play="images/new/diana/dnew_ani12.webm", size=(1280, 720))
+# image dnew_ani13 = Movie(play="images/new/diana/dnew_ani13.webm", size = (1280, 720))
+image dnew_ani13 = Movie(channel="dm_dnew_ani13", play="images/new/diana/dnew_ani13.webm", size=(1280, 720))
+# image dnew_ani14 = Movie(play="images/new/diana/dnew_ani14.webm", size = (1280, 720))
+image dnew_ani14 = Movie(channel="dm_dnew_ani14", play="images/new/diana/dnew_ani14.webm", size=(1280, 720))
+# image dnew_ani15 = Movie(play="images/new/diana/dnew_ani15.webm", size = (1280, 720))
+image dnew_ani15 = Movie(channel="dm_dnew_ani15", play="images/new/diana/dnew_ani15.webm", size=(1280, 720))
+# image dnew_ani16 = Movie(play="images/new/diana/dnew_ani16.webm", size = (1280, 720))
+image dnew_ani16 = Movie(channel="dm_dnew_ani16", play="images/new/diana/dnew_ani16.webm", size=(1280, 720))
+# image dnew_ani17 = Movie(play="images/new/diana/dnew_ani17.webm", size = (1280, 720))
+image dnew_ani17 = Movie(channel="dm_dnew_ani17", play="images/new/diana/dnew_ani17.webm", size=(1280, 720))
+# image dnew_ani18 = Movie(play="images/new/diana/dnew_ani18.webm", size = (1280, 720))
+image dnew_ani18 = Movie(channel="dm_dnew_ani18", play="images/new/diana/dnew_ani18.webm", size=(1280, 720))
 
-image jnew_ani01 = Movie(play="images/new/julia/jnew_ani01.webm", size = (1280, 720))
-image jnew_ani02 = Movie(play="images/new/julia/jnew_ani02.webm", size = (1280, 720))
-image jnew_ani03 = Movie(play="images/new/julia/jnew_ani03.webm", size = (1280, 720))
-image jnew_ani04 = Movie(play="images/new/julia/jnew_ani04.webm", size = (1280, 720))
-image jnew_ani05 = Movie(play="images/new/julia/jnew_ani05.webm", size = (1280, 720))
-image jnew_ani06 = Movie(play="images/new/julia/jnew_ani06.webm", size = (1280, 720))
-image jnew_ani07 = Movie(play="images/new/julia/jnew_ani07.webm", size = (1280, 720))
-image jnew_ani08 = Movie(play="images/new/julia/jnew_ani08.webm", size = (1280, 720))
-image jnew_ani09 = Movie(play="images/new/julia/jnew_ani09.webm", size = (1280, 720))
-image jnew_ani10 = Movie(play="images/new/julia/jnew_ani10.webm", size = (1280, 720))
-image jnew_ani11 = Movie(play="images/new/julia/jnew_ani11.webm", size = (1280, 720))
-image jnew_ani12 = Movie(play="images/new/julia/jnew_ani12.webm", size = (1280, 720))
-image jnew_ani13 = Movie(play="images/new/julia/jnew_ani13.webm", size = (1280, 720))
-image jnew_ani14 = Movie(play="images/new/julia/jnew_ani14.webm", size = (1280, 720))
-image jnew_ani15 = Movie(play="images/new/julia/jnew_ani15.webm", size = (1280, 720))
-image jnew_ani16 = Movie(play="images/new/julia/jnew_ani16.webm", size = (1280, 720))
-image jnew_ani17 = Movie(play="images/new/julia/jnew_ani17.webm", size = (1280, 720))
-image jnew_ani18 = Movie(play="images/new/julia/jnew_ani18.webm", size = (1280, 720))
-image jnew_ani19 = Movie(play="images/new/julia/jnew_ani19.webm", size = (1280, 720))
-image jnew_ani20 = Movie(play="images/new/julia/jnew_ani20.webm", size = (1280, 720))
-image jnew_ani21 = Movie(play="images/new/julia/jnew_ani21.webm", size = (1280, 720))
-image jnew_ani22 = Movie(play="images/new/julia/jnew_ani22.webm", size = (1280, 720))
-image jnew_ani23 = Movie(play="images/new/julia/jnew_ani23.webm", size = (1280, 720))
-image jnew_ani24 = Movie(play="images/new/julia/jnew_ani24.webm", size = (1280, 720))
-image jnew_ani25 = Movie(play="images/new/julia/jnew_ani25.webm", size = (1280, 720))
-image jnew_ani26 = Movie(play="images/new/julia/jnew_ani26.webm", size = (1280, 720))
-image jnew_ani27 = Movie(play="images/new/julia/jnew_ani27.webm", size = (1280, 720))
-image jnew_ani28 = Movie(play="images/new/julia/jnew_ani28.webm", size = (1280, 720))
-image jnew_ani29 = Movie(play="images/new/julia/jnew_ani29.webm", size = (1280, 720))
-image jnew_ani30 = Movie(play="images/new/julia/jnew_ani30.webm", size = (1280, 720))
-image jnew_ani31 = Movie(play="images/new/julia/jnew_ani31.webm", size = (1280, 720))
-image jnew_ani32 = Movie(play="images/new/julia/jnew_ani32.webm", size = (1280, 720))
-image jnew_ani33 = Movie(play="images/new/julia/jnew_ani33.webm", size = (1280, 720))
+# image jnew_ani01 = Movie(play="images/new/julia/jnew_ani01.webm", size = (1280, 720))
+image jnew_ani01 = Movie(channel="dm_jnew_ani01", play="images/new/julia/jnew_ani01.webm", size=(1280, 720))
+# image jnew_ani02 = Movie(play="images/new/julia/jnew_ani02.webm", size = (1280, 720))
+image jnew_ani02 = Movie(channel="dm_jnew_ani02", play="images/new/julia/jnew_ani02.webm", size=(1280, 720))
+# image jnew_ani03 = Movie(play="images/new/julia/jnew_ani03.webm", size = (1280, 720))
+image jnew_ani03 = Movie(channel="dm_jnew_ani03", play="images/new/julia/jnew_ani03.webm", size=(1280, 720))
+# image jnew_ani04 = Movie(play="images/new/julia/jnew_ani04.webm", size = (1280, 720))
+image jnew_ani04 = Movie(channel="dm_jnew_ani04", play="images/new/julia/jnew_ani04.webm", size=(1280, 720))
+# image jnew_ani05 = Movie(play="images/new/julia/jnew_ani05.webm", size = (1280, 720))
+image jnew_ani05 = Movie(channel="dm_jnew_ani05", play="images/new/julia/jnew_ani05.webm", size=(1280, 720))
+# image jnew_ani06 = Movie(play="images/new/julia/jnew_ani06.webm", size = (1280, 720))
+image jnew_ani06 = Movie(channel="dm_jnew_ani06", play="images/new/julia/jnew_ani06.webm", size=(1280, 720))
+# image jnew_ani07 = Movie(play="images/new/julia/jnew_ani07.webm", size = (1280, 720))
+image jnew_ani07 = Movie(channel="dm_jnew_ani07", play="images/new/julia/jnew_ani07.webm", size=(1280, 720))
+# image jnew_ani08 = Movie(play="images/new/julia/jnew_ani08.webm", size = (1280, 720))
+image jnew_ani08 = Movie(channel="dm_jnew_ani08", play="images/new/julia/jnew_ani08.webm", size=(1280, 720))
+# image jnew_ani09 = Movie(play="images/new/julia/jnew_ani09.webm", size = (1280, 720))
+image jnew_ani09 = Movie(channel="dm_jnew_ani09", play="images/new/julia/jnew_ani09.webm", size=(1280, 720))
+# image jnew_ani10 = Movie(play="images/new/julia/jnew_ani10.webm", size = (1280, 720))
+image jnew_ani10 = Movie(channel="dm_jnew_ani10", play="images/new/julia/jnew_ani10.webm", size=(1280, 720))
+# image jnew_ani11 = Movie(play="images/new/julia/jnew_ani11.webm", size = (1280, 720))
+image jnew_ani11 = Movie(channel="dm_jnew_ani11", play="images/new/julia/jnew_ani11.webm", size=(1280, 720))
+# image jnew_ani12 = Movie(play="images/new/julia/jnew_ani12.webm", size = (1280, 720))
+image jnew_ani12 = Movie(channel="dm_jnew_ani12", play="images/new/julia/jnew_ani12.webm", size=(1280, 720))
+# image jnew_ani13 = Movie(play="images/new/julia/jnew_ani13.webm", size = (1280, 720))
+image jnew_ani13 = Movie(channel="dm_jnew_ani13", play="images/new/julia/jnew_ani13.webm", size=(1280, 720))
+# image jnew_ani14 = Movie(play="images/new/julia/jnew_ani14.webm", size = (1280, 720))
+image jnew_ani14 = Movie(channel="dm_jnew_ani14", play="images/new/julia/jnew_ani14.webm", size=(1280, 720))
+# image jnew_ani15 = Movie(play="images/new/julia/jnew_ani15.webm", size = (1280, 720))
+image jnew_ani15 = Movie(channel="dm_jnew_ani15", play="images/new/julia/jnew_ani15.webm", size=(1280, 720))
+# image jnew_ani16 = Movie(play="images/new/julia/jnew_ani16.webm", size = (1280, 720))
+image jnew_ani16 = Movie(channel="dm_jnew_ani16", play="images/new/julia/jnew_ani16.webm", size=(1280, 720))
+# image jnew_ani17 = Movie(play="images/new/julia/jnew_ani17.webm", size = (1280, 720))
+image jnew_ani17 = Movie(channel="dm_jnew_ani17", play="images/new/julia/jnew_ani17.webm", size=(1280, 720))
+# image jnew_ani18 = Movie(play="images/new/julia/jnew_ani18.webm", size = (1280, 720))
+image jnew_ani18 = Movie(channel="dm_jnew_ani18", play="images/new/julia/jnew_ani18.webm", size=(1280, 720))
+# image jnew_ani19 = Movie(play="images/new/julia/jnew_ani19.webm", size = (1280, 720))
+image jnew_ani19 = Movie(channel="dm_jnew_ani19", play="images/new/julia/jnew_ani19.webm", size=(1280, 720))
+# image jnew_ani20 = Movie(play="images/new/julia/jnew_ani20.webm", size = (1280, 720))
+image jnew_ani20 = Movie(channel="dm_jnew_ani20", play="images/new/julia/jnew_ani20.webm", size=(1280, 720))
+# image jnew_ani21 = Movie(play="images/new/julia/jnew_ani21.webm", size = (1280, 720))
+image jnew_ani21 = Movie(channel="dm_jnew_ani21", play="images/new/julia/jnew_ani21.webm", size=(1280, 720))
+# image jnew_ani22 = Movie(play="images/new/julia/jnew_ani22.webm", size = (1280, 720))
+image jnew_ani22 = Movie(channel="dm_jnew_ani22", play="images/new/julia/jnew_ani22.webm", size=(1280, 720))
+# image jnew_ani23 = Movie(play="images/new/julia/jnew_ani23.webm", size = (1280, 720))
+image jnew_ani23 = Movie(channel="dm_jnew_ani23", play="images/new/julia/jnew_ani23.webm", size=(1280, 720))
+# image jnew_ani24 = Movie(play="images/new/julia/jnew_ani24.webm", size = (1280, 720))
+image jnew_ani24 = Movie(channel="dm_jnew_ani24", play="images/new/julia/jnew_ani24.webm", size=(1280, 720))
+# image jnew_ani25 = Movie(play="images/new/julia/jnew_ani25.webm", size = (1280, 720))
+image jnew_ani25 = Movie(channel="dm_jnew_ani25", play="images/new/julia/jnew_ani25.webm", size=(1280, 720))
+# image jnew_ani26 = Movie(play="images/new/julia/jnew_ani26.webm", size = (1280, 720))
+image jnew_ani26 = Movie(channel="dm_jnew_ani26", play="images/new/julia/jnew_ani26.webm", size=(1280, 720))
+# image jnew_ani27 = Movie(play="images/new/julia/jnew_ani27.webm", size = (1280, 720))
+image jnew_ani27 = Movie(channel="dm_jnew_ani27", play="images/new/julia/jnew_ani27.webm", size=(1280, 720))
+# image jnew_ani28 = Movie(play="images/new/julia/jnew_ani28.webm", size = (1280, 720))
+image jnew_ani28 = Movie(channel="dm_jnew_ani28", play="images/new/julia/jnew_ani28.webm", size=(1280, 720))
+# image jnew_ani29 = Movie(play="images/new/julia/jnew_ani29.webm", size = (1280, 720))
+image jnew_ani29 = Movie(channel="dm_jnew_ani29", play="images/new/julia/jnew_ani29.webm", size=(1280, 720))
+# image jnew_ani30 = Movie(play="images/new/julia/jnew_ani30.webm", size = (1280, 720))
+image jnew_ani30 = Movie(channel="dm_jnew_ani30", play="images/new/julia/jnew_ani30.webm", size=(1280, 720))
+# image jnew_ani31 = Movie(play="images/new/julia/jnew_ani31.webm", size = (1280, 720))
+image jnew_ani31 = Movie(channel="dm_jnew_ani31", play="images/new/julia/jnew_ani31.webm", size=(1280, 720))
+# image jnew_ani32 = Movie(play="images/new/julia/jnew_ani32.webm", size = (1280, 720))
+image jnew_ani32 = Movie(channel="dm_jnew_ani32", play="images/new/julia/jnew_ani32.webm", size=(1280, 720))
+# image jnew_ani33 = Movie(play="images/new/julia/jnew_ani33.webm", size = (1280, 720))
+image jnew_ani33 = Movie(channel="dm_jnew_ani33", play="images/new/julia/jnew_ani33.webm", size=(1280, 720))
 
-image nnew_ani01 = Movie(play="images/new/nathan/nnew_ani01.webm", size = (1280, 720))
-image nnew_ani02 = Movie(play="images/new/nathan/nnew_ani02.webm", size = (1280, 720))
-image nnew_ani03 = Movie(play="images/new/nathan/nnew_ani03.webm", size = (1280, 720))
-image nnew_ani04 = Movie(play="images/new/nathan/nnew_ani04.webm", size = (1280, 720))
-image nnew_ani05 = Movie(play="images/new/nathan/nnew_ani05.webm", size = (1280, 720))
-image nnew_ani06 = Movie(play="images/new/nathan/nnew_ani06.webm", size = (1280, 720))
-image nnew_ani07 = Movie(play="images/new/nathan/nnew_ani07.webm", size = (1280, 720))
-image nnew_ani08 = Movie(play="images/new/nathan/nnew_ani08.webm", size = (1280, 720))
-image nnew_ani09 = Movie(play="images/new/nathan/nnew_ani09.webm", size = (1280, 720))
-image nnew_ani10 = Movie(play="images/new/nathan/nnew_ani10.webm", size = (1280, 720))
-image nnew_ani11 = Movie(play="images/new/nathan/nnew_ani11.webm", size = (1280, 720))
-image nnew_ani12 = Movie(play="images/new/nathan/nnew_ani12.webm", size = (1280, 720))
-image nnew_ani13 = Movie(play="images/new/nathan/nnew_ani13.webm", size = (1280, 720))
-image nnew_ani14 = Movie(play="images/new/nathan/nnew_ani14.webm", size = (1280, 720))
-image nnew_ani15 = Movie(play="images/new/nathan/nnew_ani15.webm", size = (1280, 720))
-image nnew_ani16 = Movie(play="images/new/nathan/nnew_ani16.webm", size = (1280, 720))
-image nnew_ani17 = Movie(play="images/new/nathan/nnew_ani17.webm", size = (1280, 720))
-image nnew_ani18 = Movie(play="images/new/nathan/nnew_ani18.webm", size = (1280, 720))
-image nnew_ani19 = Movie(play="images/new/nathan/nnew_ani19.webm", size = (1280, 720))
-image nnew_ani20 = Movie(play="images/new/nathan/nnew_ani20.webm", size = (1280, 720))
-image nnew_ani21 = Movie(play="images/new/nathan/nnew_ani21.webm", size = (1280, 720))
-image nnew_ani22 = Movie(play="images/new/nathan/nnew_ani22.webm", size = (1280, 720))
-image nnew_ani23 = Movie(play="images/new/nathan/nnew_ani23.webm", size = (1280, 720))
-image nnew_ani24 = Movie(play="images/new/nathan/nnew_ani24.webm", size = (1280, 720))
-image nnew_ani25 = Movie(play="images/new/nathan/nnew_ani25.webm", size = (1280, 720))
-image nnew_ani26 = Movie(play="images/new/nathan/nnew_ani26.webm", size = (1280, 720))
-image nnew_ani27 = Movie(play="images/new/nathan/nnew_ani27.webm", size = (1280, 720))
-image nnew_ani28 = Movie(play="images/new/nathan/nnew_ani28.webm", size = (1280, 720))
-image nnew_ani29 = Movie(play="images/new/nathan/nnew_ani29.webm", size = (1280, 720))
-image nnew_ani30 = Movie(play="images/new/nathan/nnew_ani30.webm", size = (1280, 720))
-image nnew_ani31 = Movie(play="images/new/nathan/nnew_ani31.webm", size = (1280, 720))
-image nnew_ani32 = Movie(play="images/new/nathan/nnew_ani32.webm", size = (1280, 720))
-image nnew_ani33 = Movie(play="images/new/nathan/nnew_ani33.webm", size = (1280, 720))
+# image nnew_ani01 = Movie(play="images/new/nathan/nnew_ani01.webm", size = (1280, 720))
+image nnew_ani01 = Movie(channel="dm_nnew_ani01", play="images/new/nathan/nnew_ani01.webm", size=(1280, 720))
+# image nnew_ani02 = Movie(play="images/new/nathan/nnew_ani02.webm", size = (1280, 720))
+image nnew_ani02 = Movie(channel="dm_nnew_ani02", play="images/new/nathan/nnew_ani02.webm", size=(1280, 720))
+# image nnew_ani03 = Movie(play="images/new/nathan/nnew_ani03.webm", size = (1280, 720))
+image nnew_ani03 = Movie(channel="dm_nnew_ani03", play="images/new/nathan/nnew_ani03.webm", size=(1280, 720))
+# image nnew_ani04 = Movie(play="images/new/nathan/nnew_ani04.webm", size = (1280, 720))
+image nnew_ani04 = Movie(channel="dm_nnew_ani04", play="images/new/nathan/nnew_ani04.webm", size=(1280, 720))
+# image nnew_ani05 = Movie(play="images/new/nathan/nnew_ani05.webm", size = (1280, 720))
+image nnew_ani05 = Movie(channel="dm_nnew_ani05", play="images/new/nathan/nnew_ani05.webm", size=(1280, 720))
+# image nnew_ani06 = Movie(play="images/new/nathan/nnew_ani06.webm", size = (1280, 720))
+image nnew_ani06 = Movie(channel="dm_nnew_ani06", play="images/new/nathan/nnew_ani06.webm", size=(1280, 720))
+# image nnew_ani07 = Movie(play="images/new/nathan/nnew_ani07.webm", size = (1280, 720))
+image nnew_ani07 = Movie(channel="dm_nnew_ani07", play="images/new/nathan/nnew_ani07.webm", size=(1280, 720))
+# image nnew_ani08 = Movie(play="images/new/nathan/nnew_ani08.webm", size = (1280, 720))
+image nnew_ani08 = Movie(channel="dm_nnew_ani08", play="images/new/nathan/nnew_ani08.webm", size=(1280, 720))
+# image nnew_ani09 = Movie(play="images/new/nathan/nnew_ani09.webm", size = (1280, 720))
+image nnew_ani09 = Movie(channel="dm_nnew_ani09", play="images/new/nathan/nnew_ani09.webm", size=(1280, 720))
+# image nnew_ani10 = Movie(play="images/new/nathan/nnew_ani10.webm", size = (1280, 720))
+image nnew_ani10 = Movie(channel="dm_nnew_ani10", play="images/new/nathan/nnew_ani10.webm", size=(1280, 720))
+# image nnew_ani11 = Movie(play="images/new/nathan/nnew_ani11.webm", size = (1280, 720))
+image nnew_ani11 = Movie(channel="dm_nnew_ani11", play="images/new/nathan/nnew_ani11.webm", size=(1280, 720))
+# image nnew_ani12 = Movie(play="images/new/nathan/nnew_ani12.webm", size = (1280, 720))
+image nnew_ani12 = Movie(channel="dm_nnew_ani12", play="images/new/nathan/nnew_ani12.webm", size=(1280, 720))
+# image nnew_ani13 = Movie(play="images/new/nathan/nnew_ani13.webm", size = (1280, 720))
+image nnew_ani13 = Movie(channel="dm_nnew_ani13", play="images/new/nathan/nnew_ani13.webm", size=(1280, 720))
+# image nnew_ani14 = Movie(play="images/new/nathan/nnew_ani14.webm", size = (1280, 720))
+image nnew_ani14 = Movie(channel="dm_nnew_ani14", play="images/new/nathan/nnew_ani14.webm", size=(1280, 720))
+# image nnew_ani15 = Movie(play="images/new/nathan/nnew_ani15.webm", size = (1280, 720))
+image nnew_ani15 = Movie(channel="dm_nnew_ani15", play="images/new/nathan/nnew_ani15.webm", size=(1280, 720))
+# image nnew_ani16 = Movie(play="images/new/nathan/nnew_ani16.webm", size = (1280, 720))
+image nnew_ani16 = Movie(channel="dm_nnew_ani16", play="images/new/nathan/nnew_ani16.webm", size=(1280, 720))
+# image nnew_ani17 = Movie(play="images/new/nathan/nnew_ani17.webm", size = (1280, 720))
+image nnew_ani17 = Movie(channel="dm_nnew_ani17", play="images/new/nathan/nnew_ani17.webm", size=(1280, 720))
+# image nnew_ani18 = Movie(play="images/new/nathan/nnew_ani18.webm", size = (1280, 720))
+image nnew_ani18 = Movie(channel="dm_nnew_ani18", play="images/new/nathan/nnew_ani18.webm", size=(1280, 720))
+# image nnew_ani19 = Movie(play="images/new/nathan/nnew_ani19.webm", size = (1280, 720))
+image nnew_ani19 = Movie(channel="dm_nnew_ani19", play="images/new/nathan/nnew_ani19.webm", size=(1280, 720))
+# image nnew_ani20 = Movie(play="images/new/nathan/nnew_ani20.webm", size = (1280, 720))
+image nnew_ani20 = Movie(channel="dm_nnew_ani20", play="images/new/nathan/nnew_ani20.webm", size=(1280, 720))
+# image nnew_ani21 = Movie(play="images/new/nathan/nnew_ani21.webm", size = (1280, 720))
+image nnew_ani21 = Movie(channel="dm_nnew_ani21", play="images/new/nathan/nnew_ani21.webm", size=(1280, 720))
+# image nnew_ani22 = Movie(play="images/new/nathan/nnew_ani22.webm", size = (1280, 720))
+image nnew_ani22 = Movie(channel="dm_nnew_ani22", play="images/new/nathan/nnew_ani22.webm", size=(1280, 720))
+# image nnew_ani23 = Movie(play="images/new/nathan/nnew_ani23.webm", size = (1280, 720))
+image nnew_ani23 = Movie(channel="dm_nnew_ani23", play="images/new/nathan/nnew_ani23.webm", size=(1280, 720))
+# image nnew_ani24 = Movie(play="images/new/nathan/nnew_ani24.webm", size = (1280, 720))
+image nnew_ani24 = Movie(channel="dm_nnew_ani24", play="images/new/nathan/nnew_ani24.webm", size=(1280, 720))
+# image nnew_ani25 = Movie(play="images/new/nathan/nnew_ani25.webm", size = (1280, 720))
+image nnew_ani25 = Movie(channel="dm_nnew_ani25", play="images/new/nathan/nnew_ani25.webm", size=(1280, 720))
+# image nnew_ani26 = Movie(play="images/new/nathan/nnew_ani26.webm", size = (1280, 720))
+image nnew_ani26 = Movie(channel="dm_nnew_ani26", play="images/new/nathan/nnew_ani26.webm", size=(1280, 720))
+# image nnew_ani27 = Movie(play="images/new/nathan/nnew_ani27.webm", size = (1280, 720))
+image nnew_ani27 = Movie(channel="dm_nnew_ani27", play="images/new/nathan/nnew_ani27.webm", size=(1280, 720))
+# image nnew_ani28 = Movie(play="images/new/nathan/nnew_ani28.webm", size = (1280, 720))
+image nnew_ani28 = Movie(channel="dm_nnew_ani28", play="images/new/nathan/nnew_ani28.webm", size=(1280, 720))
+# image nnew_ani29 = Movie(play="images/new/nathan/nnew_ani29.webm", size = (1280, 720))
+image nnew_ani29 = Movie(channel="dm_nnew_ani29", play="images/new/nathan/nnew_ani29.webm", size=(1280, 720))
+# image nnew_ani30 = Movie(play="images/new/nathan/nnew_ani30.webm", size = (1280, 720))
+image nnew_ani30 = Movie(channel="dm_nnew_ani30", play="images/new/nathan/nnew_ani30.webm", size=(1280, 720))
+# image nnew_ani31 = Movie(play="images/new/nathan/nnew_ani31.webm", size = (1280, 720))
+image nnew_ani31 = Movie(channel="dm_nnew_ani31", play="images/new/nathan/nnew_ani31.webm", size=(1280, 720))
+# image nnew_ani32 = Movie(play="images/new/nathan/nnew_ani32.webm", size = (1280, 720))
+image nnew_ani32 = Movie(channel="dm_nnew_ani32", play="images/new/nathan/nnew_ani32.webm", size=(1280, 720))
+# image nnew_ani33 = Movie(play="images/new/nathan/nnew_ani33.webm", size = (1280, 720))
+image nnew_ani33 = Movie(channel="dm_nnew_ani33", play="images/new/nathan/nnew_ani33.webm", size=(1280, 720))
 
-image pnew_ani01 = Movie(play="images/new/priscila/pnew_ani01.webm", size = (1280, 720))
-image pnew_ani02 = Movie(play="images/new/priscila/pnew_ani02.webm", size = (1280, 720))
-image pnew_ani03 = Movie(play="images/new/priscila/pnew_ani03.webm", size = (1280, 720))
-image pnew_ani04 = Movie(play="images/new/priscila/pnew_ani04.webm", size = (1280, 720))
-image pnew_ani05 = Movie(play="images/new/priscila/pnew_ani05.webm", size = (1280, 720))
-image pnew_ani06 = Movie(play="images/new/priscila/pnew_ani06.webm", size = (1280, 720))
-image pnew_ani07 = Movie(play="images/new/priscila/pnew_ani07.webm", size = (1280, 720))
-image pnew_ani08 = Movie(play="images/new/priscila/pnew_ani08.webm", size = (1280, 720))
-image pnew_ani09 = Movie(play="images/new/priscila/pnew_ani09.webm", size = (1280, 720))
-image pnew_ani10 = Movie(play="images/new/priscila/pnew_ani10.webm", size = (1280, 720))
-image pnew_ani11 = Movie(play="images/new/priscila/pnew_ani11.webm", size = (1280, 720))
-image pnew_ani12 = Movie(play="images/new/priscila/pnew_ani12.webm", size = (1280, 720))
-image pnew_ani13 = Movie(play="images/new/priscila/pnew_ani13.webm", size = (1280, 720))
-image pnew_ani14 = Movie(play="images/new/priscila/pnew_ani14.webm", size = (1280, 720))
-image pnew_ani15 = Movie(play="images/new/priscila/pnew_ani15.webm", size = (1280, 720))
-image pnew_ani16 = Movie(play="images/new/priscila/pnew_ani16.webm", size = (1280, 720))
-image pnew_ani17 = Movie(play="images/new/priscila/pnew_ani17.webm", size = (1280, 720))
-image pnew_ani18 = Movie(play="images/new/priscila/pnew_ani18.webm", size = (1280, 720))
-image pnew_ani19 = Movie(play="images/new/priscila/pnew_ani19.webm", size = (1280, 720))
+image pnew_ani01 = Movie(channel="dm_pnew_01", play="images/new/priscila/pnew_ani01.webm", size=(1280, 720))
+image pnew_ani02 = Movie(channel="dm_pnew_02", play="images/new/priscila/pnew_ani02.webm", size=(1280, 720))
+image pnew_ani03 = Movie(channel="dm_pnew_03", play="images/new/priscila/pnew_ani03.webm", size=(1280, 720))
+image pnew_ani04 = Movie(channel="dm_pnew_04", play="images/new/priscila/pnew_ani04.webm", size=(1280, 720))
+image pnew_ani05 = Movie(channel="dm_pnew_05", play="images/new/priscila/pnew_ani05.webm", size=(1280, 720))
+image pnew_ani06 = Movie(channel="dm_pnew_06", play="images/new/priscila/pnew_ani06.webm", size=(1280, 720))
+image pnew_ani07 = Movie(channel="dm_pnew_07", play="images/new/priscila/pnew_ani07.webm", size=(1280, 720))
+image pnew_ani08 = Movie(channel="dm_pnew_08", play="images/new/priscila/pnew_ani08.webm", size=(1280, 720))
+image pnew_ani09 = Movie(channel="dm_pnew_09", play="images/new/priscila/pnew_ani09.webm", size=(1280, 720))
+image pnew_ani10 = Movie(channel="dm_pnew_10", play="images/new/priscila/pnew_ani10.webm", size=(1280, 720))
+image pnew_ani11 = Movie(channel="dm_pnew_11", play="images/new/priscila/pnew_ani11.webm", size=(1280, 720))
+image pnew_ani12 = Movie(channel="dm_pnew_12", play="images/new/priscila/pnew_ani12.webm", size=(1280, 720))
+image pnew_ani13 = Movie(channel="dm_pnew_13", play="images/new/priscila/pnew_ani13.webm", size=(1280, 720))
+image pnew_ani14 = Movie(channel="dm_pnew_14", play="images/new/priscila/pnew_ani14.webm", size=(1280, 720))
+image pnew_ani15 = Movie(channel="dm_pnew_15", play="images/new/priscila/pnew_ani15.webm", size=(1280, 720))
+image pnew_ani16 = Movie(channel="dm_pnew_16", play="images/new/priscila/pnew_ani16.webm", size=(1280, 720))
+image pnew_ani17 = Movie(channel="dm_pnew_17", play="images/new/priscila/pnew_ani17.webm", size=(1280, 720))
+image pnew_ani18 = Movie(channel="dm_pnew_18", play="images/new/priscila/pnew_ani18.webm", size=(1280, 720))
+image pnew_ani19 = Movie(channel="dm_pnew_19", play="images/new/priscila/pnew_ani19.webm", size=(1280, 720))
 
-image snew_ani01 = Movie(play="images/new/sayuri/snew_ani01.webm", size = (1280, 720))
-image snew_ani02 = Movie(play="images/new/sayuri/snew_ani02.webm", size = (1280, 720))
-image snew_ani03 = Movie(play="images/new/sayuri/snew_ani03.webm", size = (1280, 720))
-image snew_ani04 = Movie(play="images/new/sayuri/snew_ani04.webm", size = (1280, 720))
-image snew_ani05 = Movie(play="images/new/sayuri/snew_ani05.webm", size = (1280, 720))
-image snew_ani06 = Movie(play="images/new/sayuri/snew_ani06.webm", size = (1280, 720))
-image snew_ani07 = Movie(play="images/new/sayuri/snew_ani07.webm", size = (1280, 720))
-image snew_ani08 = Movie(play="images/new/sayuri/snew_ani08.webm", size = (1280, 720))
-image snew_ani09 = Movie(play="images/new/sayuri/snew_ani09.webm", size = (1280, 720))
-image snew_ani10 = Movie(play="images/new/sayuri/snew_ani10.webm", size = (1280, 720))
-image snew_ani11 = Movie(play="images/new/sayuri/snew_ani11.webm", size = (1280, 720))
-image snew_ani12 = Movie(play="images/new/sayuri/snew_ani12.webm", size = (1280, 720))
-image snew_ani13 = Movie(play="images/new/sayuri/snew_ani13.webm", size = (1280, 720))
-image snew_ani14 = Movie(play="images/new/sayuri/snew_ani14.webm", size = (1280, 720))
-image snew_ani15 = Movie(play="images/new/sayuri/snew_ani15.webm", size = (1280, 720))
-image snew_ani16 = Movie(play="images/new/sayuri/snew_ani16.webm", size = (1280, 720))
-image snew_ani17 = Movie(play="images/new/sayuri/snew_ani17.webm", size = (1280, 720))
-image snew_ani18 = Movie(play="images/new/sayuri/snew_ani18.webm", size = (1280, 720))
-image snew_ani19 = Movie(play="images/new/sayuri/snew_ani19.webm", size = (1280, 720))
-image snew_ani20 = Movie(play="images/new/sayuri/snew_ani20.webm", size = (1280, 720))
-image snew_ani21 = Movie(play="images/new/sayuri/snew_ani21.webm", size = (1280, 720))
-image snew_ani22 = Movie(play="images/new/sayuri/snew_ani22.webm", size = (1280, 720))
-image snew_ani23 = Movie(play="images/new/sayuri/snew_ani23.webm", size = (1280, 720))
+# image snew_ani01 = Movie(play="images/new/sayuri/snew_ani01.webm", size = (1280, 720))
+image snew_ani01 = Movie(channel="dm_snew_ani01", play="images/new/sayuri/snew_ani01.webm", size=(1280, 720))
+# image snew_ani02 = Movie(play="images/new/sayuri/snew_ani02.webm", size = (1280, 720))
+image snew_ani02 = Movie(channel="dm_snew_ani02", play="images/new/sayuri/snew_ani02.webm", size=(1280, 720))
+# image snew_ani03 = Movie(play="images/new/sayuri/snew_ani03.webm", size = (1280, 720))
+image snew_ani03 = Movie(channel="dm_snew_ani03", play="images/new/sayuri/snew_ani03.webm", size=(1280, 720))
+# image snew_ani04 = Movie(play="images/new/sayuri/snew_ani04.webm", size = (1280, 720))
+image snew_ani04 = Movie(channel="dm_snew_ani04", play="images/new/sayuri/snew_ani04.webm", size=(1280, 720))
+# image snew_ani05 = Movie(play="images/new/sayuri/snew_ani05.webm", size = (1280, 720))
+image snew_ani05 = Movie(channel="dm_snew_ani05", play="images/new/sayuri/snew_ani05.webm", size=(1280, 720))
+# image snew_ani06 = Movie(play="images/new/sayuri/snew_ani06.webm", size = (1280, 720))
+image snew_ani06 = Movie(channel="dm_snew_ani06", play="images/new/sayuri/snew_ani06.webm", size=(1280, 720))
+# image snew_ani07 = Movie(play="images/new/sayuri/snew_ani07.webm", size = (1280, 720))
+image snew_ani07 = Movie(channel="dm_snew_ani07", play="images/new/sayuri/snew_ani07.webm", size=(1280, 720))
+# image snew_ani08 = Movie(play="images/new/sayuri/snew_ani08.webm", size = (1280, 720))
+image snew_ani08 = Movie(channel="dm_snew_ani08", play="images/new/sayuri/snew_ani08.webm", size=(1280, 720))
+# image snew_ani09 = Movie(play="images/new/sayuri/snew_ani09.webm", size = (1280, 720))
+image snew_ani09 = Movie(channel="dm_snew_ani09", play="images/new/sayuri/snew_ani09.webm", size=(1280, 720))
+# image snew_ani10 = Movie(play="images/new/sayuri/snew_ani10.webm", size = (1280, 720))
+image snew_ani10 = Movie(channel="dm_snew_ani10", play="images/new/sayuri/snew_ani10.webm", size=(1280, 720))
+# image snew_ani11 = Movie(play="images/new/sayuri/snew_ani11.webm", size = (1280, 720))
+image snew_ani11 = Movie(channel="dm_snew_ani11", play="images/new/sayuri/snew_ani11.webm", size=(1280, 720))
+# image snew_ani12 = Movie(play="images/new/sayuri/snew_ani12.webm", size = (1280, 720))
+image snew_ani12 = Movie(channel="dm_snew_ani12", play="images/new/sayuri/snew_ani12.webm", size=(1280, 720))
+# image snew_ani13 = Movie(play="images/new/sayuri/snew_ani13.webm", size = (1280, 720))
+image snew_ani13 = Movie(channel="dm_snew_ani13", play="images/new/sayuri/snew_ani13.webm", size=(1280, 720))
+# image snew_ani14 = Movie(play="images/new/sayuri/snew_ani14.webm", size = (1280, 720))
+image snew_ani14 = Movie(channel="dm_snew_ani14", play="images/new/sayuri/snew_ani14.webm", size=(1280, 720))
+# image snew_ani15 = Movie(play="images/new/sayuri/snew_ani15.webm", size = (1280, 720))
+image snew_ani15 = Movie(channel="dm_snew_ani15", play="images/new/sayuri/snew_ani15.webm", size=(1280, 720))
+# image snew_ani16 = Movie(play="images/new/sayuri/snew_ani16.webm", size = (1280, 720))
+image snew_ani16 = Movie(channel="dm_snew_ani16", play="images/new/sayuri/snew_ani16.webm", size=(1280, 720))
+# image snew_ani17 = Movie(play="images/new/sayuri/snew_ani17.webm", size = (1280, 720))
+image snew_ani17 = Movie(channel="dm_snew_ani17", play="images/new/sayuri/snew_ani17.webm", size=(1280, 720))
+# image snew_ani18 = Movie(play="images/new/sayuri/snew_ani18.webm", size = (1280, 720))
+image snew_ani18 = Movie(channel="dm_snew_ani18", play="images/new/sayuri/snew_ani18.webm", size=(1280, 720))
+# image snew_ani19 = Movie(play="images/new/sayuri/snew_ani19.webm", size = (1280, 720))
+image snew_ani19 = Movie(channel="dm_snew_ani19", play="images/new/sayuri/snew_ani19.webm", size=(1280, 720))
+# image snew_ani20 = Movie(play="images/new/sayuri/snew_ani20.webm", size = (1280, 720))
+image snew_ani20 = Movie(channel="dm_snew_ani20", play="images/new/sayuri/snew_ani20.webm", size=(1280, 720))
+# image snew_ani21 = Movie(play="images/new/sayuri/snew_ani21.webm", size = (1280, 720))
+image snew_ani21 = Movie(channel="dm_snew_ani21", play="images/new/sayuri/snew_ani21.webm", size=(1280, 720))
+# image snew_ani22 = Movie(play="images/new/sayuri/snew_ani22.webm", size = (1280, 720))
+image snew_ani22 = Movie(channel="dm_snew_ani22", play="images/new/sayuri/snew_ani22.webm", size=(1280, 720))
+# image snew_ani23 = Movie(play="images/new/sayuri/snew_ani23.webm", size = (1280, 720))
+image snew_ani23 = Movie(channel="dm_snew_ani23", play="images/new/sayuri/snew_ani23.webm", size=(1280, 720))
 
-image sonew_ani01 = Movie(play="images/new/sofia/sonew_ani01.webm", size = (1280, 720))
-image sonew_ani02 = Movie(play="images/new/sofia/sonew_ani02.webm", size = (1280, 720))
-image sonew_ani03 = Movie(play="images/new/sofia/sonew_ani03.webm", size = (1280, 720))
-image sonew_ani04 = Movie(play="images/new/sofia/sonew_ani04.webm", size = (1280, 720))
-image sonew_ani05 = Movie(play="images/new/sofia/sonew_ani05.webm", size = (1280, 720))
-image sonew_ani06 = Movie(play="images/new/sofia/sonew_ani06.webm", size = (1280, 720))
-image sonew_ani07 = Movie(play="images/new/sofia/sonew_ani07.webm", size = (1280, 720))
-image sonew_ani08 = Movie(play="images/new/sofia/sonew_ani08.webm", size = (1280, 720))
-image sonew_ani09 = Movie(play="images/new/sofia/sonew_ani09.webm", size = (1280, 720))
+# image sonew_ani01 = Movie(play="images/new/sofia/sonew_ani01.webm", size = (1280, 720))
+image sonew_ani01 = Movie(channel="dm_sonew_ani01", play="images/new/sofia/sonew_ani01.webm", size=(1280, 720))
+# image sonew_ani02 = Movie(play="images/new/sofia/sonew_ani02.webm", size = (1280, 720))
+image sonew_ani02 = Movie(channel="dm_sonew_ani02", play="images/new/sofia/sonew_ani02.webm", size=(1280, 720))
+# image sonew_ani03 = Movie(play="images/new/sofia/sonew_ani03.webm", size = (1280, 720))
+image sonew_ani03 = Movie(channel="dm_sonew_ani03", play="images/new/sofia/sonew_ani03.webm", size=(1280, 720))
+# image sonew_ani04 = Movie(play="images/new/sofia/sonew_ani04.webm", size = (1280, 720))
+image sonew_ani04 = Movie(channel="dm_sonew_ani04", play="images/new/sofia/sonew_ani04.webm", size=(1280, 720))
+# image sonew_ani05 = Movie(play="images/new/sofia/sonew_ani05.webm", size = (1280, 720))
+image sonew_ani05 = Movie(channel="dm_sonew_ani05", play="images/new/sofia/sonew_ani05.webm", size=(1280, 720))
+# image sonew_ani06 = Movie(play="images/new/sofia/sonew_ani06.webm", size = (1280, 720))
+image sonew_ani06 = Movie(channel="dm_sonew_ani06", play="images/new/sofia/sonew_ani06.webm", size=(1280, 720))
+# image sonew_ani07 = Movie(play="images/new/sofia/sonew_ani07.webm", size = (1280, 720))
+image sonew_ani07 = Movie(channel="dm_sonew_ani07", play="images/new/sofia/sonew_ani07.webm", size=(1280, 720))
+# image sonew_ani08 = Movie(play="images/new/sofia/sonew_ani08.webm", size = (1280, 720))
+image sonew_ani08 = Movie(channel="dm_sonew_ani08", play="images/new/sofia/sonew_ani08.webm", size=(1280, 720))
+# image sonew_ani09 = Movie(play="images/new/sofia/sonew_ani09.webm", size = (1280, 720))
+image sonew_ani09 = Movie(channel="dm_sonew_ani09", play="images/new/sofia/sonew_ani09.webm", size=(1280, 720))
 
 
 
@@ -552,7 +815,7 @@ default persistent.priscila_cena10 = False
 default mtempo = False
 default musica = "mus1"
 default etempo = False
-default userlogado = True
+default userlogado = renpy.android
 default useremail = "convidado"
 default hora_pauta = False
 default proibido_salvar = False
@@ -1944,15 +2207,15 @@ layeredimage mc_mari falando:
 layeredimage ape_geral:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if chovendo:
@@ -1980,15 +2243,15 @@ layeredimage ape_geral:
 layeredimage ape_new:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
 
@@ -2063,15 +2326,15 @@ layeredimage ape_pensando:
 layeredimage academia:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if chovendo:
@@ -2096,15 +2359,15 @@ layeredimage academia:
 layeredimage ape_xiang:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if chovendo:
@@ -2162,15 +2425,15 @@ layeredimage ape_xiang:
 layeredimage cidade:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if fundo_especial:
@@ -2250,15 +2513,15 @@ layeredimage cidade:
 layeredimage ilha:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if fundo_especial:
@@ -2314,15 +2577,15 @@ layeredimage ilha:
 layeredimage chinatown:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if chovendo:
@@ -2408,15 +2671,15 @@ layeredimage chinatown:
 layeredimage xiang_casa1:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     always:
@@ -2425,15 +2688,15 @@ layeredimage xiang_casa1:
 layeredimage xiangu_casa1:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if chovendo:
@@ -2447,15 +2710,15 @@ layeredimage xiangu_casa1:
 layeredimage xiangu_casa2:
 
     if tempo <= 1:
-        Movie(play='fundo_1.webm')
+        "images/fundo_dia.jpg"
 
 
     elif tempo == 2:
-        Movie(play='fundo_2.webm')
+        "images/fundo_tarde.jpg"
 
 
     else:
-        Movie(play='fundo_3.webm')
+        "images/fundo_noite.jpg"
 
 
     if chovendo:
@@ -2471,9 +2734,9 @@ layeredimage xiangu_casa2:
 
 
 image black = "#000"
-image white = "#ffffff"
-image red = "#FF0000"
-image logo = "extra/geiko.webp"
+image white = "#000000"
+image red = "#000000"
+# image logo = "extra/geiko.webp"
 
 transform zoomM:
     zoom 0.2
@@ -2636,11 +2899,16 @@ label splashscreen:
 
     return
 
-
-
+###########################################
+####-------------Cheat Delean----------####
 label opening:
 
-    jump before_main_menu
+    call dados_essenciais from _call_dados_essenciais_abertura_direta
+
+    return
+
+###########################################
+####--------Fim doCheat Delean---------####
 
 transform transform_blink:
     linear 1.0 alpha 0.2
@@ -2678,6 +2946,10 @@ screen press_to_start():
         imagemap:
             ground "extra/transparent.png"
             hotspot (0, 0,1280, 720) focus_mask None action Call("login_convidado")
+
+
+###########################################
+####-------------Cheat Delean----------####
 
 label before_main_menu:
 
@@ -2821,29 +3093,38 @@ label before_main_menu:
 
         call screen press_to_start
 
+
+###########################################
+####-------------Cheat Delean----------####
     scene black
 
-    $ renpy.pause(1, hard=True)
-
     python:
-        if renpy.android:
-            userlogado = PythonSDLActivity.pegaLogado();
+        # Android consulta sua sessao original; Windows carrega a conta local.
+        userlogado = PythonSDLActivity.pegaLogado()
+
+    if premium and not userlogado:
+        jump before_main_menu
+
+    # Mantém a inicialização necessária, sem tela branca e sem logotipo.
+    call dados_essenciais from _call_dados_essenciais_1
 
     if premium:
 
-        if not userlogado:
+        python:
+            if renpy.android:
+                persistent.apoiador = PythonSDLActivity.pegaBacker()
 
-            jump before_main_menu
+        if renpy.variant("android") and not persistent.apoiador:
+            jump nao_apoiador
 
-    play sound "extra/logo.mp3"
+###########################################
+####--------Fim do Cheat Delean--------####
 
-    show white at transform_white
-    $ renpy.pause(2, hard=True)
 
     call dados_essenciais from _call_dados_essenciais_1
 
     show logo at transform_logo
-    $ renpy.pause(5, hard=True)
+    $ renpy.pause(0, hard=True)
 
     if premium:
 
@@ -2857,10 +3138,10 @@ label before_main_menu:
             jump nao_apoiador
 
     hide logo
-    $ renpy.pause(2, hard=True)
+    $ renpy.pause(0, hard=True)
 
     hide white
-    $ renpy.pause(2, hard=True)
+    $ renpy.pause(0, hard=True)
 
     $ renpy.choice_for_skipping()
 
@@ -2978,9 +3259,8 @@ screen menu_lojacartas():
     use menu_sidebar
 
     python:
-        if renpy.android:
-            persistent.coins = PythonSDLActivity.pegaMoedas(0)
-            persistent.vid = PythonSDLActivity.pegaVID()
+        persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        persistent.vid = PythonSDLActivity.pegaVID()
 
 
 
@@ -3087,37 +3367,36 @@ screen menu_album():
     use menu_sidebar
 
     python:
-        if renpy.android:
-            persistent.card_1 = PythonSDLActivity.pegaCarta1()
-            persistent.card_2 = PythonSDLActivity.pegaCarta2()
-            persistent.card_3 = PythonSDLActivity.pegaCarta3()
-            persistent.card_4 = PythonSDLActivity.pegaCarta4()
-            persistent.card_5 = PythonSDLActivity.pegaCarta5()
-            persistent.card_501 = PythonSDLActivity.pegaCarta501()
-            persistent.card_502 = PythonSDLActivity.pegaCarta502()
-            persistent.card_503 = PythonSDLActivity.pegaCarta503()
-            persistent.card_504 = PythonSDLActivity.pegaCarta504()
-            persistent.card_505 = PythonSDLActivity.pegaCarta505()
-            persistent.card_506 = PythonSDLActivity.pegaCarta506()
-            persistent.card_507 = PythonSDLActivity.pegaCarta507()
-            persistent.card_508 = PythonSDLActivity.pegaCarta508()
-            persistent.card_509 = PythonSDLActivity.pegaCarta509()
-            persistent.card_510 = PythonSDLActivity.pegaCarta510()
-            persistent.card_1001 = PythonSDLActivity.pegaCarta1001()
-            persistent.card_1002 = PythonSDLActivity.pegaCarta1002()
-            persistent.card_1003 = PythonSDLActivity.pegaCarta1003()
-            persistent.card_1004 = PythonSDLActivity.pegaCarta1004()
-            persistent.card_1005 = PythonSDLActivity.pegaCarta1005()
-            persistent.card_1006 = PythonSDLActivity.pegaCarta1006()
-            persistent.card_1007 = PythonSDLActivity.pegaCarta1007()
-            persistent.card_1008 = PythonSDLActivity.pegaCarta1008()
-            persistent.card_1009 = PythonSDLActivity.pegaCarta1009()
-            persistent.card_1010 = PythonSDLActivity.pegaCarta1010()
-            persistent.card_1011 = PythonSDLActivity.pegaCarta1011()
-            persistent.card_1012 = PythonSDLActivity.pegaCarta1012()
-            persistent.card_1013 = PythonSDLActivity.pegaCarta1013()
-            persistent.card_1014 = PythonSDLActivity.pegaCarta1014()
-            persistent.card_1015 = PythonSDLActivity.pegaCarta1015()
+        persistent.card_1 = PythonSDLActivity.pegaCarta1()
+        persistent.card_2 = PythonSDLActivity.pegaCarta2()
+        persistent.card_3 = PythonSDLActivity.pegaCarta3()
+        persistent.card_4 = PythonSDLActivity.pegaCarta4()
+        persistent.card_5 = PythonSDLActivity.pegaCarta5()
+        persistent.card_501 = PythonSDLActivity.pegaCarta501()
+        persistent.card_502 = PythonSDLActivity.pegaCarta502()
+        persistent.card_503 = PythonSDLActivity.pegaCarta503()
+        persistent.card_504 = PythonSDLActivity.pegaCarta504()
+        persistent.card_505 = PythonSDLActivity.pegaCarta505()
+        persistent.card_506 = PythonSDLActivity.pegaCarta506()
+        persistent.card_507 = PythonSDLActivity.pegaCarta507()
+        persistent.card_508 = PythonSDLActivity.pegaCarta508()
+        persistent.card_509 = PythonSDLActivity.pegaCarta509()
+        persistent.card_510 = PythonSDLActivity.pegaCarta510()
+        persistent.card_1001 = PythonSDLActivity.pegaCarta1001()
+        persistent.card_1002 = PythonSDLActivity.pegaCarta1002()
+        persistent.card_1003 = PythonSDLActivity.pegaCarta1003()
+        persistent.card_1004 = PythonSDLActivity.pegaCarta1004()
+        persistent.card_1005 = PythonSDLActivity.pegaCarta1005()
+        persistent.card_1006 = PythonSDLActivity.pegaCarta1006()
+        persistent.card_1007 = PythonSDLActivity.pegaCarta1007()
+        persistent.card_1008 = PythonSDLActivity.pegaCarta1008()
+        persistent.card_1009 = PythonSDLActivity.pegaCarta1009()
+        persistent.card_1010 = PythonSDLActivity.pegaCarta1010()
+        persistent.card_1011 = PythonSDLActivity.pegaCarta1011()
+        persistent.card_1012 = PythonSDLActivity.pegaCarta1012()
+        persistent.card_1013 = PythonSDLActivity.pegaCarta1013()
+        persistent.card_1014 = PythonSDLActivity.pegaCarta1014()
+        persistent.card_1015 = PythonSDLActivity.pegaCarta1015()
 
     frame style "menu_conteudo":
 
