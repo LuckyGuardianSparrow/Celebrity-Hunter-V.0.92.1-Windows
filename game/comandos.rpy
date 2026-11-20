@@ -59,6 +59,22 @@ label daily_random:
 
 label comprar_cash:
 
+    if not renpy.android:
+
+        menu:
+            "Adicionar CR$ 250 (simulacao local)":
+                $ PythonSDLActivity.ganhaCash(250)
+            "Adicionar CR$ 1.000 (simulacao local)":
+                $ PythonSDLActivity.ganhaCash(1000)
+            "Adicionar CR$ 2.000 (simulacao local)":
+                $ PythonSDLActivity.ganhaCash(2000)
+            "Agora nao":
+                return
+
+        $ cash = PythonSDLActivity.pegaCash()
+        $ renpy.notify("Saldo atualizado: CR$ %s." % cash)
+        return
+
     if renpy.variant("android"):
 
         $ userlogado = PythonSDLActivity.pegaLogado();
@@ -137,6 +153,18 @@ label comprar_cash:
     return
 
 label comprar_coins:
+
+    if not renpy.android:
+
+        menu:
+            "Adicionar 10.000 Celebrity Coins (simulacao local)":
+                $ PythonSDLActivity.addCoins(10000)
+            "Agora nao":
+                return
+
+        $ persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        $ renpy.notify("Saldo atualizado: %s Celebrity Coins." % persistent.coins)
+        return
 
 
 
@@ -274,14 +302,12 @@ label checa_tempo:
         return
 
     python:
-        if renpy.android:
-            PythonSDLActivity.pegaTempo()
+        PythonSDLActivity.pegaTempo()
 
     $ renpy.pause(delay=1, hard=True)
 
     python:
-        if renpy.android:
-            checatempo = PythonSDLActivity.checaTempo()
+        checatempo = PythonSDLActivity.checaTempo()
 
     $ renpy.pause(delay=1, hard=True)
 
@@ -290,14 +316,12 @@ label checa_tempo:
         $ renpy.notify("Conectando...")
 
         python:
-            if renpy.android:
-                PythonSDLActivity.pegaTempo()
+            PythonSDLActivity.pegaTempo()
 
         $ renpy.pause(delay=2, hard=True)
 
         python:
-            if renpy.android:
-                checatempo = PythonSDLActivity.checaTempo()
+            checatempo = PythonSDLActivity.checaTempo()
 
         $ renpy.pause(delay=2, hard=True)
 
@@ -306,14 +330,12 @@ label checa_tempo:
             $ renpy.notify("Pegando dados do servidor...")
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.pegaTempo()
+                PythonSDLActivity.pegaTempo()
 
             $ renpy.pause(delay=2, hard=True)
 
             python:
-                if renpy.android:
-                    checatempo = PythonSDLActivity.checaTempo()
+                checatempo = PythonSDLActivity.checaTempo()
 
             $ renpy.pause(delay=2, hard=True)
 
@@ -322,14 +344,12 @@ label checa_tempo:
                 "{b}Sua conexão com o servidor está lenta. Tentando conectar novamente...{/b}"
 
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.pegaTempo()
+                    PythonSDLActivity.pegaTempo()
 
                 $ renpy.pause(delay=2, hard=True)
 
                 python:
-                    if renpy.android:
-                        checatempo = PythonSDLActivity.checaTempo()
+                    checatempo = PythonSDLActivity.checaTempo()
 
                 $ renpy.pause(delay=2, hard=True)
 
@@ -407,8 +427,7 @@ label ganha_daily:
     call checa_tempo from _call_checa_tempo_7
 
     python:
-        if renpy.android:
-            daily = PythonSDLActivity.checkDailyNext()
+        daily = PythonSDLActivity.checkDailyNext()
 
         renpy.notify("Checando se você já pode pegar moedas")
 
@@ -416,10 +435,9 @@ label ganha_daily:
 
     if daily:
         python:
-            if renpy.android:
-                PythonSDLActivity.setDaily()
-                PythonSDLActivity.addCoins(50)
-                PythonSDLActivity.registraEvento("recebeu_daily","ganhou","daily")
+            PythonSDLActivity.setDaily()
+            PythonSDLActivity.addCoins(50)
+            PythonSDLActivity.registraEvento("recebeu_daily","ganhou","daily")
 
         $ renpy.notify("Parabéns! Você recebeu 50 Celebrity Coins! Volte daqui 24 horas para pegar novamente.")
     else:
@@ -435,35 +453,37 @@ label ganha_daily:
 
 label avanca_massagem:
 
-    if persistent.coins >= 300:
-
-        python:
-            if renpy.android:
+    if renpy.android:
+        if persistent.coins >= 300:
+    
+            python:
                 PythonSDLActivity.liberaAulaMas()
                 persistent.coins = PythonSDLActivity.usaMoedas(300)
                 PythonSDLActivity.registraEvento("comprou_aula_massagem","massagem","aula")
-
-        $ renpy.block_rollback()
-
-        play sound "extra/carta.mp3"
-
-        "{b}Você usou 300 Celebrity Coins{/b}"
-
-        $ renpy.notify("Próxima aula liberada com sucesso.")
+    
+            $ renpy.block_rollback()
+    
+            play sound "extra/carta.mp3"
+    
+            "{b}Você usou 300 Celebrity Coins{/b}"
+    
+            $ renpy.notify("Próxima aula liberada com sucesso.")
+        else:
+    
+    
+            p "Infelizmente você não tem {b}Celebrity Coins{/b} suficientes para liberar a próxima aula."
+    
+            p "Você pode conseguir moedas facilmente vendo vídeos na {b}Loja de Cartas{/b} ou comprando na nossa {b}Loja{/b}."
+    
+            show seta with vpunch
+    
+            p "Só clicar no botão {b}Menu{/b} aqui no canto inferior direito."
+    
+            p "Você também pode esperar as {b}8 horas{/b} terminarem. Ainda estaremos por aqui!"
+    
+            hide seta
     else:
-
-
-        p "Infelizmente você não tem {b}Celebrity Coins{/b} suficientes para liberar a próxima aula."
-
-        p "Você pode conseguir moedas facilmente vendo vídeos na {b}Loja de Cartas{/b} ou comprando na nossa {b}Loja{/b}."
-
-        show seta with vpunch
-
-        p "Só clicar no botão {b}Menu{/b} aqui no canto inferior direito."
-
-        p "Você também pode esperar as {b}8 horas{/b} terminarem. Ainda estaremos por aqui!"
-
-        hide seta
+        $ renpy.notify("Aulas de massagem liberadas no Windows.")
 
     jump karli_curso
 
@@ -472,15 +492,13 @@ label avanca_massagem:
 label fazer_login:
 
     python:
-        if renpy.android:
-            PythonSDLActivity.abreLogin()
+        PythonSDLActivity.abreLogin()
+        userlogado = PythonSDLActivity.pegaLogado()
 
     if userlogado:
 
-        if renpy.variant("android"):
-
-            $ email = PythonSDLActivity.pegaEmail()
-            $ uid = PythonSDLActivity.pegaUid()
+        $ email = PythonSDLActivity.pegaEmail()
+        $ uid = PythonSDLActivity.pegaUid()
 
     return
 
@@ -489,27 +507,22 @@ label fazer_login_menu:
     hide screen menu_loja with Dissolve(0.5)
 
     python:
-        if renpy.android:
-            PythonSDLActivity.abreLogin()
+        PythonSDLActivity.abreLogin()
 
-    "{b}Entrando na sua conta...{/b}"
+    if renpy.android:
+        "{b}Entrando na sua conta...{/b}"
+    else:
+        $ renpy.notify("Conta local do Windows conectada.")
 
     python:
-        if renpy.android:
-            userlogado = PythonSDLActivity.pegaLogado();
-
-        else:
-            
-            userlogado = True
+        userlogado = PythonSDLActivity.pegaLogado()
 
     if userlogado:
 
         "{b}Você entrou em sua conta com sucesso!{/b}"
 
-        if renpy.variant("android"):
-
-            $ email = PythonSDLActivity.pegaEmail()
-            $ uid = PythonSDLActivity.pegaUid()
+        $ email = PythonSDLActivity.pegaEmail()
+        $ uid = PythonSDLActivity.pegaUid()
 
     show screen menu_loja with Dissolve(0.5)
 
@@ -982,152 +995,182 @@ label checar_celular:
 
         if carta_escolhida == 1:
 
-            $ persistent.card_1 = True
+            if renpy.android:
+                $ persistent.card_1 = True
             $ carta_nome = carta_nome_1
 
         elif carta_escolhida == 2:
 
-            $ persistent.card_2 = True
+            if renpy.android:
+                $ persistent.card_2 = True
             $ carta_nome = carta_nome_2
 
         elif carta_escolhida == 3:
 
-            $ persistent.card_3 = True
+            if renpy.android:
+                $ persistent.card_3 = True
             $ carta_nome = carta_nome_3
 
         elif carta_escolhida == 4:
 
-            $ persistent.card_4 = True
+            if renpy.android:
+                $ persistent.card_4 = True
             $ carta_nome = carta_nome_4
 
         elif carta_escolhida == 5:
 
-            $ persistent.card_5 = True
+            if renpy.android:
+                $ persistent.card_5 = True
             $ carta_nome = carta_nome_5
 
         elif carta_escolhida == 501:
 
-            $ persistent.card_501 = True
+            if renpy.android:
+                $ persistent.card_501 = True
             $ carta_nome = carta_nome_501
 
         elif carta_escolhida == 502:
 
-            $ persistent.card_502 = True
+            if renpy.android:
+                $ persistent.card_502 = True
             $ carta_nome = carta_nome_502
 
         elif carta_escolhida == 503:
 
-            $ persistent.card_503 = True
+            if renpy.android:
+                $ persistent.card_503 = True
             $ carta_nome = carta_nome_503
 
         elif carta_escolhida == 504:
 
-            $ persistent.card_504 = True
+            if renpy.android:
+                $ persistent.card_504 = True
             $ carta_nome = carta_nome_504
 
         elif carta_escolhida == 505:
 
-            $ persistent.card_505 = True
+            if renpy.android:
+                $ persistent.card_505 = True
             $ carta_nome = carta_nome_505
 
         elif carta_escolhida == 506:
 
-            $ persistent.card_506 = True
+            if renpy.android:
+                $ persistent.card_506 = True
             $ carta_nome = carta_nome_506
 
         elif carta_escolhida == 507:
 
-            $ persistent.card_507 = True
+            if renpy.android:
+                $ persistent.card_507 = True
             $ carta_nome = carta_nome_507
 
         elif carta_escolhida == 508:
 
-            $ persistent.card_508 = True
+            if renpy.android:
+                $ persistent.card_508 = True
             $ carta_nome = carta_nome_508
 
         elif carta_escolhida == 509:
 
-            $ persistent.card_509 = True
+            if renpy.android:
+                $ persistent.card_509 = True
             $ carta_nome = carta_nome_509
 
         elif carta_escolhida == 510:
 
-            $ persistent.card_510 = True
+            if renpy.android:
+                $ persistent.card_510 = True
             $ carta_nome = carta_nome_510
 
         elif carta_escolhida == 1001:
 
-            $ persistent.card_1001 = True
+            if renpy.android:
+                $ persistent.card_1001 = True
             $ carta_nome = carta_nome_1001
 
         elif carta_escolhida == 1002:
 
-            $ persistent.card_1002 = True
+            if renpy.android:
+                $ persistent.card_1002 = True
             $ carta_nome = carta_nome_1002
 
         elif carta_escolhida == 1003:
 
-            $ persistent.card_1003 = True
+            if renpy.android:
+                $ persistent.card_1003 = True
             $ carta_nome = carta_nome_1003
 
         elif carta_escolhida == 1004:
 
-            $ persistent.card_1004 = True
+            if renpy.android:
+                $ persistent.card_1004 = True
             $ carta_nome = carta_nome_1004
 
         elif carta_escolhida == 1005:
 
-            $ persistent.card_1005 = True
+            if renpy.android:
+                $ persistent.card_1005 = True
             $ carta_nome = carta_nome_1005
 
         elif carta_escolhida == 1006:
 
-            $ persistent.card_1006 = True
+            if renpy.android:
+                $ persistent.card_1006 = True
             $ carta_nome = carta_nome_1006
 
         elif carta_escolhida == 1007:
 
-            $ persistent.card_1007 = True
+            if renpy.android:
+                $ persistent.card_1007 = True
             $ carta_nome = carta_nome_1007
 
         elif carta_escolhida == 1008:
 
-            $ persistent.card_1008 = True
+            if renpy.android:
+                $ persistent.card_1008 = True
             $ carta_nome = carta_nome_1008
 
         elif carta_escolhida == 1009:
 
-            $ persistent.card_1009 = True
+            if renpy.android:
+                $ persistent.card_1009 = True
             $ carta_nome = carta_nome_1009
 
         elif carta_escolhida == 1010:
 
-            $ persistent.card_1010 = True
+            if renpy.android:
+                $ persistent.card_1010 = True
             $ carta_nome = carta_nome_1010
 
         elif carta_escolhida == 1011:
 
-            $ persistent.card_1011 = True
+            if renpy.android:
+                $ persistent.card_1011 = True
             $ carta_nome = carta_nome_1011
 
         elif carta_escolhida == 1012:
 
-            $ persistent.card_1012 = True
+            if renpy.android:
+                $ persistent.card_1012 = True
             $ carta_nome = carta_nome_1012
 
         elif carta_escolhida == 1013:
 
-            $ persistent.card_1013 = True
+            if renpy.android:
+                $ persistent.card_1013 = True
             $ carta_nome = carta_nome_1013
 
         elif carta_escolhida == 1014:
 
-            $ persistent.card_1014 = True
+            if renpy.android:
+                $ persistent.card_1014 = True
             $ carta_nome = carta_nome_1014
 
         elif carta_escolhida == 1015:
 
-            $ persistent.card_1015 = True
+            if renpy.android:
+                $ persistent.card_1015 = True
             $ carta_nome = carta_nome_1015
 
         python:
@@ -1135,6 +1178,14 @@ label checar_celular:
                 PythonSDLActivity.ganhaCarta(carta_escolhida)
                 persistent.coins = PythonSDLActivity.usaMoedas(10)
                 PythonSDLActivity.registraEvento("carta_sorteada","compra","carta")
+                compra_carta_ok = True
+            else:
+                compra_carta_ok = PythonSDLActivity.compraCarta(carta_escolhida)
+
+        if compra_carta_ok is not True:
+            $ renpy.notify("Compra da carta nao concluida.")
+            call screen menu_lojacartas
+            return
 
         play sound "extra/carta.mp3"
 
@@ -3238,9 +3289,8 @@ label compra_carro:
         mc "Só preciso da documentação, né?"
 
     python:
-        if renpy.android:
-            cash = PythonSDLActivity.pegaCash()
-            carro = PythonSDLActivity.pegaCarro()
+        cash = PythonSDLActivity.pegaCash()
+        carro = PythonSDLActivity.pegaCarro()
 
     gina "Isso mesmo. Para ajeitar tudo você vai precisar de {b}C$ 2.000{/b}. Essa é a taxa que o despachante vai pedir. Só isso."
 
@@ -3267,12 +3317,14 @@ label compra_carro:
 
 
                 python:
-                    if renpy.android:
-                        cash = PythonSDLActivity.pegaCash()
-                        
-                        if cash >= 2000:
-                            
-                            PythonSDLActivity.compraCarro()
+                    cash = PythonSDLActivity.pegaCash()
+                    compra_ok = False
+                    if cash >= 2000:
+                        compra_ok = PythonSDLActivity.compraCarro()
+
+                if compra_ok is not True:
+                    "Compra do carro nao concluida."
+                    jump compra_carro
 
                 $ renpy.block_rollback()
 
@@ -3327,8 +3379,7 @@ label compra_carro:
                 mc "Tá falando sério?"
 
                 python:
-                    if renpy.android:
-                        carro = PythonSDLActivity.pegaCarro()
+                    carro = PythonSDLActivity.pegaCarro()
 
                 gina "Com certeza, garoto. Num desses... hmmm... dá uma coisa diferente olhando pra você."
 
@@ -3844,9 +3895,8 @@ label dados_essenciais:
         $ persistent.banned = False
 
     python:
-        if renpy.android:
-            cash = PythonSDLActivity.pegaCash()
-            persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        cash = PythonSDLActivity.pegaCash()
+        persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
 
 
@@ -3873,9 +3923,8 @@ label carrega_compra:
     $ renpy.pause(delay=7, hard=True)
 
     python:
-        if renpy.android:
-            persistent.coins = PythonSDLActivity.pegaMoedas(0)
-            cash = PythonSDLActivity.pegaCash()
+        persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        cash = PythonSDLActivity.pegaCash()
 
     show screen menu_loja with Dissolve(0.5)
 
@@ -3894,9 +3943,8 @@ label carrega_compra2:
     $ renpy.pause(delay=5, hard=True)
 
     python:
-        if renpy.android:
-            persistent.coins = PythonSDLActivity.pegaMoedas(0)
-            cash = PythonSDLActivity.pegaCash()
+        persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        cash = PythonSDLActivity.pegaCash()
 
     "{b}Seus dados foram atualizados com as informações da nuvem{/b}"
 
