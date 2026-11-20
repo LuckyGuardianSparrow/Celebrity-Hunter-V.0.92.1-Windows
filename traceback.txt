@@ -1,0 +1,32 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/1_definicoes.rpy", line 3101, in script
+    python:
+  File "game/1_definicoes.rpy", line 3106, in <module>
+    dm_carregar_conta_windows()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^  
+NameError: name 'dm_carregar_conta_windows' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "renpy/common/00start.rpy", line 332, in script call
+    call expression "before_main_menu"
+  File "game/1_definicoes.rpy", line 3101, in script
+    python:
+  File "renpy/ast.py", line 1187, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1273, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/1_definicoes.rpy", line 3106, in <module>
+    dm_carregar_conta_windows()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^  
+NameError: name 'dm_carregar_conta_windows' is not defined
+
+Windows-10-10.0.19045-SP0 AMD64
+Ren'Py 8.5.0.25111603
+Celebrity Hunter 0.93
+Thu Nov 19 22:03:14 2026
