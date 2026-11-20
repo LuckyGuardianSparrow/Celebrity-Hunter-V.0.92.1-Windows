@@ -1211,8 +1211,7 @@ label biblioteca:
                                 "Droga. Essa seção da Biblioteca não é grátis. Pra ler estes livros eu tenho que pagar."
 
                                 python:
-                                    if renpy.android:
-                                        livros_liberados_db = PythonSDLActivity.pegaLivros()
+                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
 
                                 "E olha o preço! C$ 250! Esses livros adultos devem ser bons mesmos..."
 
@@ -1231,8 +1230,7 @@ label biblioteca:
                                     jump livro1_evento
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 "Certo. Parece que vai custar C$ 250."
 
@@ -1249,24 +1247,32 @@ label biblioteca:
                                         "Comprar acesso ao Volume 1 por {b}C$ 250{/b}" if livros_liberados < 1:
 
                                             python:
+                                                compra_livro_ok = False
+                                                livro_pago_agora = False
+                                                livros_liberados_db = PythonSDLActivity.pegaLivros()
                                                 if renpy.android:
-                                                    
-                                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
-                                                    
                                                     if livros_liberados == livros_liberados_db:
                                                         PythonSDLActivity.addLivros()
-                                                        
                                                         livros_liberados += 1
-
-
-
+                                                        livro_pago_agora = True
+                                                    compra_livro_ok = True
+                                                elif livros_liberados == livros_liberados_db:
+                                                    resultado_livro = PythonSDLActivity.addLivros()
+                                                    if resultado_livro is not False:
+                                                        livros_liberados += 1
+                                                        livro_pago_agora = True
+                                                        compra_livro_ok = True
+                                                else:
+                                                    livros_liberados = max(livros_liberados, livros_liberados_db)
+                                                    compra_livro_ok = True
                                                 renpy.block_rollback()
 
-                                            "{b}Você usou C$ 250 para liberar este volume{/b}"
+                                            if not compra_livro_ok:
+                                                "Pagamento nao concluido."
+                                                jump biblioteca_2andar
 
-                                            if not renpy.variant("android"):
-
-                                                $ livros_liberados += 1
+                                            if livro_pago_agora:
+                                                "{b}Você usou C$ 250 para liberar este volume{/b}"
 
                                             jump livro1_evento
                                         "Melhor deixar pra outra hora":
@@ -1479,8 +1485,7 @@ label biblioteca:
                                 "Este também custa C$ 250. Deve ser ainda melhor que o primeiro!"
 
                                 python:
-                                    if renpy.android:
-                                        livros_liberados_db = PythonSDLActivity.pegaLivros()
+                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
 
                                 "{i}Este volume contém 20 fotos exclusivas de sacerdotisas de Inanna em seu traje tradicional ou nuas.{/i}"
 
@@ -1497,8 +1502,7 @@ label biblioteca:
                                     jump livro2_evento
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 "Certo. Parece que vai custar C$ 250."
 
@@ -1515,24 +1519,32 @@ label biblioteca:
                                         "Comprar acesso ao Volume 2 por {b}C$ 250{/b}" if livros_liberados < 2:
 
                                             python:
+                                                compra_livro_ok = False
+                                                livro_pago_agora = False
+                                                livros_liberados_db = PythonSDLActivity.pegaLivros()
                                                 if renpy.android:
-                                                    
-                                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
-                                                    
                                                     if livros_liberados == livros_liberados_db:
                                                         PythonSDLActivity.addLivros()
-                                                        
                                                         livros_liberados += 1
-
-
-
+                                                        livro_pago_agora = True
+                                                    compra_livro_ok = True
+                                                elif livros_liberados == livros_liberados_db:
+                                                    resultado_livro = PythonSDLActivity.addLivros()
+                                                    if resultado_livro is not False:
+                                                        livros_liberados += 1
+                                                        livro_pago_agora = True
+                                                        compra_livro_ok = True
+                                                else:
+                                                    livros_liberados = max(livros_liberados, livros_liberados_db)
+                                                    compra_livro_ok = True
                                                 renpy.block_rollback()
 
-                                            "{b}Você usou C$ 250 para liberar este volume{/b}"
+                                            if not compra_livro_ok:
+                                                "Pagamento nao concluido."
+                                                jump biblioteca_2andar
 
-                                            if not renpy.variant("android"):
-
-                                                $ livros_liberados += 1
+                                            if livro_pago_agora:
+                                                "{b}Você usou C$ 250 para liberar este volume{/b}"
 
                                             jump livro2_evento
                                         "Melhor deixar pra outra hora":
@@ -1747,8 +1759,7 @@ label biblioteca:
                                 "Este também custa C$ 250. Deve ser tão bom quanto o anterior!"
 
                                 python:
-                                    if renpy.android:
-                                        livros_liberados_db = PythonSDLActivity.pegaLivros()
+                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
 
                                 "{i}Este volume contém mais de 20 fotos exclusivas de sacerdotisas de Inanna nuas.{/i}"
 
@@ -1765,8 +1776,7 @@ label biblioteca:
                                     jump livro3_evento
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 "Certo. Parece que vai custar C$ 250."
 
@@ -1783,21 +1793,32 @@ label biblioteca:
                                         "Comprar acesso ao Volume 3 por {b}C$ 250{/b}" if livros_liberados < 3:
 
                                             python:
+                                                compra_livro_ok = False
+                                                livro_pago_agora = False
+                                                livros_liberados_db = PythonSDLActivity.pegaLivros()
                                                 if renpy.android:
-                                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
-                                                    
                                                     if livros_liberados == livros_liberados_db:
                                                         PythonSDLActivity.addLivros()
-                                                        
                                                         livros_liberados += 1
-
+                                                        livro_pago_agora = True
+                                                    compra_livro_ok = True
+                                                elif livros_liberados == livros_liberados_db:
+                                                    resultado_livro = PythonSDLActivity.addLivros()
+                                                    if resultado_livro is not False:
+                                                        livros_liberados += 1
+                                                        livro_pago_agora = True
+                                                        compra_livro_ok = True
+                                                else:
+                                                    livros_liberados = max(livros_liberados, livros_liberados_db)
+                                                    compra_livro_ok = True
                                                 renpy.block_rollback()
 
-                                            "{b}Você usou C$ 250 para liberar este volume{/b}"
+                                            if not compra_livro_ok:
+                                                "Pagamento nao concluido."
+                                                jump biblioteca_2andar
 
-                                            if not renpy.variant("android"):
-
-                                                $ livros_liberados += 1
+                                            if livro_pago_agora:
+                                                "{b}Você usou C$ 250 para liberar este volume{/b}"
 
                                             jump livro3_evento
                                         "Melhor deixar pra outra hora":
@@ -2020,8 +2041,7 @@ label biblioteca:
                                 "Este também custa C$ 250. Deve ser tão bom quanto o anterior!"
 
                                 python:
-                                    if renpy.android:
-                                        livros_liberados_db = PythonSDLActivity.pegaLivros()
+                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
 
                                 "{i}Este volume contém mais de 20 fotos exclusivas de sacerdotisas de Inanna nuas.{/i}"
 
@@ -2038,8 +2058,7 @@ label biblioteca:
                                     jump livro4_evento
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 "Certo. Parece que vai custar C$ 250."
 
@@ -2056,21 +2075,32 @@ label biblioteca:
                                         "Comprar acesso ao Volume 4 por {b}C$ 250{/b}" if livros_liberados < 4:
 
                                             python:
+                                                compra_livro_ok = False
+                                                livro_pago_agora = False
+                                                livros_liberados_db = PythonSDLActivity.pegaLivros()
                                                 if renpy.android:
-                                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
-                                                    
                                                     if livros_liberados == livros_liberados_db:
                                                         PythonSDLActivity.addLivros()
-                                                        
                                                         livros_liberados += 1
-
+                                                        livro_pago_agora = True
+                                                    compra_livro_ok = True
+                                                elif livros_liberados == livros_liberados_db:
+                                                    resultado_livro = PythonSDLActivity.addLivros()
+                                                    if resultado_livro is not False:
+                                                        livros_liberados += 1
+                                                        livro_pago_agora = True
+                                                        compra_livro_ok = True
+                                                else:
+                                                    livros_liberados = max(livros_liberados, livros_liberados_db)
+                                                    compra_livro_ok = True
                                                 renpy.block_rollback()
 
-                                            "{b}Você usou C$ 250 para liberar este volume{/b}"
+                                            if not compra_livro_ok:
+                                                "Pagamento nao concluido."
+                                                jump biblioteca_2andar
 
-                                            if not renpy.variant("android"):
-
-                                                $ livros_liberados += 1
+                                            if livro_pago_agora:
+                                                "{b}Você usou C$ 250 para liberar este volume{/b}"
 
                                             jump livro4_evento
                                         "Melhor deixar pra outra hora":
@@ -2293,8 +2323,7 @@ label biblioteca:
                                 "Este também custa C$ 250. Deve ser tão bom quanto o anterior!"
 
                                 python:
-                                    if renpy.android:
-                                        livros_liberados_db = PythonSDLActivity.pegaLivros()
+                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
 
                                 "{i}Este volume contém mais de 20 fotos exclusivas de sacerdotisas de Inanna nuas.{/i}"
 
@@ -2311,8 +2340,7 @@ label biblioteca:
                                     jump livro5_evento
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 "Certo. Parece que vai custar C$ 250."
 
@@ -2329,21 +2357,32 @@ label biblioteca:
                                         "Comprar acesso ao Volume 5 por {b}C$ 250{/b}" if livros_liberados < 5:
 
                                             python:
+                                                compra_livro_ok = False
+                                                livro_pago_agora = False
+                                                livros_liberados_db = PythonSDLActivity.pegaLivros()
                                                 if renpy.android:
-                                                    livros_liberados_db = PythonSDLActivity.pegaLivros()
-                                                    
                                                     if livros_liberados == livros_liberados_db:
                                                         PythonSDLActivity.addLivros()
-                                                        
                                                         livros_liberados += 1
-
+                                                        livro_pago_agora = True
+                                                    compra_livro_ok = True
+                                                elif livros_liberados == livros_liberados_db:
+                                                    resultado_livro = PythonSDLActivity.addLivros()
+                                                    if resultado_livro is not False:
+                                                        livros_liberados += 1
+                                                        livro_pago_agora = True
+                                                        compra_livro_ok = True
+                                                else:
+                                                    livros_liberados = max(livros_liberados, livros_liberados_db)
+                                                    compra_livro_ok = True
                                                 renpy.block_rollback()
 
-                                            "{b}Você usou C$ 250 para liberar este volume{/b}"
+                                            if not compra_livro_ok:
+                                                "Pagamento nao concluido."
+                                                jump biblioteca_2andar
 
-                                            if not renpy.variant("android"):
-
-                                                $ livros_liberados += 1
+                                            if livro_pago_agora:
+                                                "{b}Você usou C$ 250 para liberar este volume{/b}"
 
                                             jump livro5_evento
                                         "Melhor deixar pra outra hora":
@@ -2682,8 +2721,7 @@ label academia_treino:
     call checa_tempo from _call_checa_tempo_9
 
     python:
-        if renpy.android:
-            mttempo = PythonSDLActivity.checkMTtempoNext()
+        mttempo = PythonSDLActivity.checkMTtempoNext()
 
     if not mttempo:
 
@@ -2703,8 +2741,7 @@ label academia_treino:
             p "Lembrando que os treinos com a [ma] e sozinho usam o mesmo horário."
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         p "Ou você pode liberar o próximo treino agora mesmo usando Celebrity Coins."
 
@@ -2717,8 +2754,7 @@ label academia_treino:
 
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaMTTempo()
+                        PythonSDLActivity.avancaMTTempo()
 
                     $ renpy.block_rollback()
 
@@ -2787,10 +2823,8 @@ label academia_treino:
             "Bora lá!"
 
         python:
-            if renpy.android:
-                PythonSDLActivity.setMTtempoNext()
-                
-                renpy.block_rollback()
+            PythonSDLActivity.setMTtempoNext()
+            renpy.block_rollback()
 
     "Qual treino eu faço hoje?"
 
