@@ -112,63 +112,6 @@ label start:
     p "Melhorou?"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     mc concentrando "Acho que sim... Só que ainda não tô entendendo o que tá acontecendo."
 
 
@@ -267,11 +210,11 @@ label start:
 
         p "Qual é seu nome e sobrenome então?"
 
-        $ mcpnome = "Gustavo"
-        $ mcsnome = "Rodrigues"
-        call screen text_input_screen
+        # $ mcpnome = "Delean"
+        # $ mcsnome = "Mafra"
+        # call screen text_input_screen
 
-        call screen confirmar_nome
+        # call screen confirmar_nome
 
         if mcpnome and mcsnome:
 
@@ -283,7 +226,7 @@ label start:
 
         elif mcpnome and not mcsnome:
 
-            $ mcsnome = "Rodrigues"
+            $ mcsnome = "Mafra"
 
             mc normal "Eu lembro que meu nome é [mcpnome], mas..."
 
@@ -293,7 +236,7 @@ label start:
 
         elif mcsnome and not mcpnome:
 
-            $ mcpnome = "Gustavo"
+            $ mcpnome = "Delean"
 
             mc triste "Eu lembro só que meu sobrenome é [mcsnome]... Mas o mais fácil, meu nome, não..."
 
@@ -308,46 +251,6 @@ label start:
             jump nome_nao
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         jump pcena_continua
 
     label nome_nao:
@@ -355,8 +258,8 @@ label start:
 
 
         python:
-            mcpnome = "Gustavo"
-            mcsnome = "Rodrigues"
+            mcpnome = "Delean"
+            mcsnome = "Mafra"
 
         p "Deixa que eu te ajudo."
 
@@ -368,7 +271,7 @@ label start:
 
 
 
-        p "Você se chama Gustavo Rodrigues. É um nome bonito, igual você..."
+        p "Você se chama Delean Mafra. É um nome bonito, igual você..."
 
         menu:
             "Obrigado pela ajuda.":
@@ -4331,8 +4234,7 @@ label start:
                 "{b}Comprar a roupa para trabalhar na Blergh!{/b} (C$ 250) (continua a história)" if n8_roupa == 1:
 
                     python:
-                        if renpy.android:
-                            roupa_nathan = PythonSDLActivity.pegaRoupaNathan()
+                        roupa_nathan = PythonSDLActivity.pegaRoupaNathan()
 
                     mc "Pagar pra trabalhar pra você... onde já se viu isso?"
 
@@ -4353,8 +4255,7 @@ label start:
                         jump nathan_evento8_parte2
 
                     python:
-                        if renpy.android:
-                            cash = PythonSDLActivity.pegaCash()
+                        cash = PythonSDLActivity.pegaCash()
 
                     "Então eu preciso de {b}C$ 250{/b} pra comprar essa roupa e trabalhar na Blergh! Fabrício muquirana."
 
@@ -4373,16 +4274,13 @@ label start:
 
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
-                                        
-                                        if cash >= 250:
-                                            
-                                            PythonSDLActivity.compraRoupaNathan()
-                                            
-                                            roupa_nathan = True
+                                    cash = PythonSDLActivity.pegaCash()
+                                    compra_ok = False
+                                    if cash >= 250:
+                                        compra_ok = PythonSDLActivity.compraRoupaNathan()
+                                        roupa_nathan = PythonSDLActivity.pegaRoupaNathan()
 
-                                if roupa_nathan:
+                                if compra_ok is True and roupa_nathan:
 
                                     $ renpy.block_rollback()
 
@@ -4509,8 +4407,7 @@ label start:
                         gar "Tenho apenas uma condição. Você terá que me pagar o valor de {b}C$ 250{/b} pela informação."
 
                         python:
-                            if renpy.android:
-                                pauta_fabricio = PythonSDLActivity.pegaPauta()
+                            pauta_fabricio = PythonSDLActivity.pegaPauta()
 
                         if not pauta_fabricio:
 
@@ -4547,8 +4444,7 @@ label start:
                             label fabricio_pauta_menu:
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 gar "Então. São C$ 250 pela informação. Assim faço você trabalhar no bar me ajudando até conseguir toda a grana."
 
@@ -4565,8 +4461,11 @@ label start:
                                     "Comprar a pauta do [gar]" if cash >= 250:
 
                                         python:
-                                            if renpy.android:
-                                                PythonSDLActivity.compraPauta()
+                                            compra_ok = PythonSDLActivity.compraPauta()
+
+                                        if compra_ok is not True:
+                                            "Compra da pauta nao concluida."
+                                            jump fabricio_pauta_menu
 
                                         $ renpy.block_rollback()
 
@@ -6806,8 +6705,7 @@ label start:
         mc "P-pode deixar... eu vou fazer uma boa cobertura."
 
         python:
-            if renpy.android:
-                roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
 
         b "'Boa' é demais pra você! Só não estrague TUDO!"
 
@@ -8692,8 +8590,7 @@ label compra_pauta_over:
     label pauta_cassia_escolhe:
 
         python:
-            if renpy.android:
-                pauta_cassia_db = PythonSDLActivity.pegaPautaCassia()
+            pauta_cassia_db = PythonSDLActivity.pegaPautaCassia()
 
         $ renpy.choice_for_skipping()
 
@@ -8708,8 +8605,7 @@ label compra_pauta_over:
             jump pauta_cassia_comprou
 
         python:
-            if renpy.android:
-                cash = PythonSDLActivity.pegaCash()
+            cash = PythonSDLActivity.pegaCash()
 
         $ renpy.choice_for_skipping()
 
@@ -8754,9 +8650,8 @@ label compra_pauta_over:
                         jump pauta_cassia_escolhe
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.addPautaCassia()
-                    PythonSDLActivity.registraEvento("pauta_cassia","a","a")
+                PythonSDLActivity.addPautaCassia()
+                PythonSDLActivity.registraEvento("pauta_cassia","a","a")
 
                 renpy.block_rollback()
 
