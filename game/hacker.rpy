@@ -93,14 +93,13 @@ label nona_evento1:
     "Deixa eu ver aqui."
 
     python:
-        if renpy.android:
-            persistent.coins = PythonSDLActivity.pegaMoedas(0)
-            cash = PythonSDLActivity.pegaCash()
-            mc_fisico = PythonSDLActivity.pegaFpontos()
-            bao_pontos = PythonSDLActivity.pegaBao()
+        persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        cash = PythonSDLActivity.pegaCash()
+        mc_fisico = PythonSDLActivity.pegaFpontos()
+        bao_pontos = PythonSDLActivity.pegaBao()
             
-            if userlogado:
-                useremail = PythonSDLActivity.pegaEmail()
+        if userlogado:
+            useremail = PythonSDLActivity.pegaEmail()
 
     $ novo_cash = cash + 300000
 
