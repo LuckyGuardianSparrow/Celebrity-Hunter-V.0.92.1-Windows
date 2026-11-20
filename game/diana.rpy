@@ -17837,10 +17837,9 @@ label diana_evento2:
     mc "Pelo que eu vi aqui..."
 
     python:
-        if renpy.android:
-            cash = PythonSDLActivity.pegaCash()
-            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
-            roupa_blazer = PythonSDLActivity.pegaBlazer()
+        cash = PythonSDLActivity.pegaCash()
+        roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+        roupa_blazer = PythonSDLActivity.pegaBlazer()
 
     if not roupa_blazer and not roupa_blacktie:
 
@@ -18013,10 +18012,9 @@ label diana_e2_cassino:
     "..."
 
     python:
-        if renpy.android:
-            cash = PythonSDLActivity.pegaCash()
-            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
-            roupa_blazer = PythonSDLActivity.pegaBlazer()
+        cash = PythonSDLActivity.pegaCash()
+        roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+        roupa_blazer = PythonSDLActivity.pegaBlazer()
 
     stop sound
 
