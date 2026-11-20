@@ -200,8 +200,7 @@ label natasha_evento:
     $ renpy.choice_for_skipping()
 
     python:
-        if renpy.android:
-            natasha_db = PythonSDLActivity.pegaNatasha()
+        natasha_db = PythonSDLActivity.pegaNatasha()
 
     if natasha_vez < natasha_db:
 
@@ -220,8 +219,7 @@ label natasha_evento:
     call checa_tempo from _call_checa_tempo_6
 
     python:
-        if renpy.android:
-            ntempo = PythonSDLActivity.checkNtempoNext()
+        ntempo = PythonSDLActivity.checkNtempoNext()
 
     if not ntempo:
 
@@ -237,8 +235,7 @@ label natasha_evento:
         p "Use o app Relógio no celular do [mc] para ver quando será possível falar com ela novamente."
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         label libera_natasha_coins:
 
@@ -256,8 +253,7 @@ label natasha_evento:
                     $ show_quick_menu = False
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaNTempo()
+                        PythonSDLActivity.avancaNTempo()
 
                     $ renpy.block_rollback()
 
@@ -322,11 +318,10 @@ label natasha_evento:
             PythonSDLActivity.registraEvento("natasha_evento","natasha","personagem")
 
     python:
-        if renpy.android:
-            PythonSDLActivity.setNtempoNext()
-            natasha_vez += 1
-            nnext = PythonSDLActivity.pegaNNext()
-            renpy.block_rollback()
+        PythonSDLActivity.setNtempoNext()
+        natasha_vez += 1
+        nnext = PythonSDLActivity.pegaNNext()
+        renpy.block_rollback()
 
 
 
