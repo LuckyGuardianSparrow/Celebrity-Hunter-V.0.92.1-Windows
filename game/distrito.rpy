@@ -255,9 +255,8 @@ label clube_bdsm_entrada:
     label clube_grana:
 
         python:
-            if renpy.android:
-                distrito_db = PythonSDLActivity.pegaDistrito()
-                distrito_soma = distrito + 1
+            distrito_db = PythonSDLActivity.pegaDistrito()
+            distrito_soma = distrito + 1
 
         if distrito_soma < distrito_db:
 
@@ -274,8 +273,7 @@ label clube_bdsm_entrada:
             jump clube_bdsm
 
         python:
-            if renpy.android:
-                cash = PythonSDLActivity.pegaCash()
+            cash = PythonSDLActivity.pegaCash()
 
         "Tem uma taxa de {b}C$ 10{/b} para entrar no clube."
 
@@ -343,16 +341,49 @@ label clube_bdsm_entrada:
 
                 "..."
 
+                # python:
+                #     if renpy.android:
+                #         PythonSDLActivity.usaCash(10)
+                #         PythonSDLActivity.addDistrito()
+                #         PythonSDLActivity.registraEvento("clube_bdsm_pagou","blackcash","personagem")
+                #         distrito += 1
+
+                #     renpy.block_rollback()
+
+                # jump clube_bdsm
+#############################################################################
                 python:
-                    if renpy.android:
-                        PythonSDLActivity.usaCash(10)
-                        PythonSDLActivity.addDistrito
-                        PythonSDLActivity.registraEvento("clube_bdsm_pagou","blackcash","personagem")
-                        distrito += 1
+                    cash = PythonSDLActivity.pegaCash()
+
+                    if cash >= 10:
+                        pagamento_ok = PythonSDLActivity.usaCash(10)
+
+                        if pagamento_ok is not False:
+                            PythonSDLActivity.addDistrito()
+                            distrito += 1
+
+                            if renpy.android:
+                                PythonSDLActivity.registraEvento(
+                                    "clube_bdsm_pagou",
+                                    "blackcash",
+                                    "personagem"
+                                )
+                        else:
+                            pagamento_ok = False
+                    else:
+                        pagamento_ok = False
 
                     renpy.block_rollback()
 
+                if pagamento_ok is False:
+
+                    "Não foi possível concluir o pagamento."
+
+                    jump cenario_distrito
+
                 jump clube_bdsm
+#############################################################################
+
 
             "Quem está no clube hoje?" if bdsm_1vez >= 4:
 
@@ -648,8 +679,7 @@ label clube_bdsm:
 
                 renpy.choice_for_skipping()
 
-                if renpy.android:
-                    xiang_evento_db = PythonSDLActivity.pegaXiang()
+                xiang_evento_db = PythonSDLActivity.pegaXiang()
 
             if xiang_evento < xiang_evento_db and not xiang_errou:
 
@@ -732,8 +762,7 @@ label clube_bdsm:
                 nora "O bom é que o preço do showzinho dela é bem barato. Qualquer um pode pagar. É {b}C$ 50{/b}."
 
             python:
-                if renpy.android:
-                    cash = PythonSDLActivity.pegaCash()
+                cash = PythonSDLActivity.pegaCash()
 
             "Eu tô com {b}C$ [cash]{/b}..."
 
@@ -792,8 +821,7 @@ label clube_bdsm:
             $ renpy.choice_for_skipping()
 
             python:
-                if renpy.android:
-                    cash = PythonSDLActivity.pegaCash()
+                cash = PythonSDLActivity.pegaCash()
 
             menu:
 
@@ -809,8 +837,11 @@ label clube_bdsm:
                     mc "Obrigado."
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.usaCash(50)
+                        pagamento_xiang = PythonSDLActivity.usaCash(50)
+
+                    if pagamento_xiang is False:
+                        "Pagamento nao concluido."
+                        jump bdsm_clube_bar
 
                     $ renpy.block_rollback()
 
@@ -1681,11 +1712,10 @@ label xiang_show_inicio:
                 mc zerado "Parece até coisa de videogame..."
 
             python:
-                if renpy.android:
-                    xiang_evento_db = PythonSDLActivity.pegaXiang()
+                xiang_evento_db = PythonSDLActivity.pegaXiang()
                     
-                    if xiang_evento == xiang_evento_db:
-                        PythonSDLActivity.addXiang()
+                if xiang_evento == xiang_evento_db:
+                    PythonSDLActivity.addXiang()
 
                 xiang_evento += 1
                 xiang_errou = False
@@ -1875,11 +1905,10 @@ label xiang_show_inicio:
         mc zerado "Mesmo que eu acabe sem um tostão no bolso..."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -2054,11 +2083,10 @@ label xiang_show_inicio:
         "Tô ansioso pra ver ela de novo."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -2241,11 +2269,10 @@ label xiang_show_inicio:
         "..."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -2406,11 +2433,10 @@ label xiang_show_inicio:
         "Nem sei se vou voltar mais aqui. Perdeu toda a graça..."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -2623,11 +2649,10 @@ label xiang_show_inicio:
         "Não vejo a hora de ver ela de novo!"
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -2853,11 +2878,10 @@ label xiang_show_inicio:
         scene black with Dissolve(1.0)
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -3096,11 +3120,10 @@ label xiang_show_inicio:
         i "Volta logo."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -3333,11 +3356,10 @@ label xiang_show_inicio:
         "..."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -3564,11 +3586,10 @@ label xiang_show_inicio:
         "..."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -3779,11 +3800,10 @@ label xiang_show_inicio:
         "Só tomara que não dê merda..."
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
@@ -3796,11 +3816,10 @@ label xiang_show_inicio:
     elif xiang_evento == 11:
 
         python:
-            if renpy.android:
-                xiang_evento_db = PythonSDLActivity.pegaXiang()
+            xiang_evento_db = PythonSDLActivity.pegaXiang()
                 
-                if xiang_evento == xiang_evento_db:
-                    PythonSDLActivity.addXiang()
+            if xiang_evento == xiang_evento_db:
+                PythonSDLActivity.addXiang()
 
             xiang_evento += 1
 
