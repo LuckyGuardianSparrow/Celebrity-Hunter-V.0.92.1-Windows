@@ -21,8 +21,7 @@ label cenario_mercado:
             "Por algum motivo pizza é muito barata aqui na ilha."
 
             python:
-                if renpy.android:
-                    cash = PythonSDLActivity.pegaCash()
+                cash = PythonSDLActivity.pegaCash()
 
             if cash == 0:
 
@@ -141,8 +140,7 @@ label cenario_mercado:
                     p lecionando "Essa garota é especial realmente. Algo nela não me cheira bem."
 
                     python:
-                        if renpy.android:
-                            cash = PythonSDLActivity.pegaCash()
+                        cash = PythonSDLActivity.pegaCash()
 
                     p rindo "Para poder conhecer ela melhor, você precisa juntar {b}R$ 30{/b} para fazer uma compra no mercado."
 
@@ -391,8 +389,7 @@ label cenario_praia:
                 if k7_continua and not k7_poscasa:
 
                     python:
-                        if renpy.android:
-                            casa = PythonSDLActivity.pegaCasa()
+                        casa = PythonSDLActivity.pegaCasa()
 
                     "Eu fiquei de ver o lance da casa e depois retornar pra [m]."
 
@@ -567,8 +564,7 @@ label cenario_praia:
                     call checa_logado from _call_checa_logado_8
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.tempoAgora()
+                        PythonSDLActivity.tempoAgora()
 
                     mc normal "Ei! [m]! Tá aí?!"
 
@@ -583,8 +579,7 @@ label cenario_praia:
                     label karli_curso:
 
                         python:
-                            if renpy.android:
-                                mc_massagem_db = PythonSDLActivity.pegaMpontos()
+                            mc_massagem_db = PythonSDLActivity.pegaMpontos()
 
                         scene salao geral with dissolve
 
@@ -658,21 +653,27 @@ label cenario_praia:
 
                                         jump massagem_curso
 
-                                    call checa_tempo from _call_checa_tempo_10
+                                    # call checa_tempo from _call_checa_tempo_10
 
+                                    # m "Certo..."
+
+                                    # python:
+                                    #     if renpy.android:
+                                    #         mtempo = PythonSDLActivity.checkMtempoNext()
+
+                                    # if mtempo:
                                     m "Certo..."
 
-                                    python:
-                                        if renpy.android:
-                                            mtempo = PythonSDLActivity.checkMtempoNext()
+                                    # No Windows, a próxima aula está sempre disponível.
+                                    $ mtempo = True
 
                                     if mtempo:
+
 
                                         m "Então fechou."
 
                                         python:
-                                            if renpy.android:
-                                                PythonSDLActivity.setMtempoNext()
+                                            PythonSDLActivity.setMtempoNext()
 
                                         jump massagem_curso
                                     else:
@@ -693,8 +694,7 @@ label cenario_praia:
                                         p "Ah! Você também pode liberar a próxima aula usando {b}Celebrity Coins{/b}."
 
                                         python:
-                                            if renpy.android:
-                                                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+                                            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
                                         if persistent.coins >= 300:
 
@@ -705,8 +705,7 @@ label cenario_praia:
 
 
                                                     python:
-                                                        if renpy.android:
-                                                            PythonSDLActivity.avancaMasTempo()
+                                                        PythonSDLActivity.avancaMasTempo()
 
                                                     $ renpy.block_rollback()
 
@@ -1119,8 +1118,7 @@ label cenario_praia:
                     label pixie_ajuda_encontro:
 
                         python:
-                            if renpy.android:
-                                persistent.guia1 = PythonSDLActivity.pegaGuia1()
+                            persistent.guia1 = PythonSDLActivity.pegaGuia1()
 
                         scene fadolandia geral with dissolve
 
@@ -1153,16 +1151,23 @@ label cenario_praia:
 
 
                                     python:
-                                        if renpy.android:
-                                            persistent.coins = PythonSDLActivity.pegaMoedas(0)
+                                        persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
                                     if persistent.coins >= 300:
 
                                         python:
+                                            compra_guia_ok = False
                                             if renpy.android:
                                                 PythonSDLActivity.compraGuia1()
                                                 persistent.coins = PythonSDLActivity.usaMoedas(300)
                                                 PythonSDLActivity.registraEvento("guia1_liberado","guia1","guias")
+                                                compra_guia_ok = True
+                                            else:
+                                                compra_guia_ok = PythonSDLActivity.compraGuia1()
+
+                                        if compra_guia_ok is not True:
+                                            "Pagamento nao concluido."
+                                            jump pixie_ajuda_encontro
 
                                         play sound "extra/carta.mp3"
 
@@ -2256,8 +2261,7 @@ label cenario_praia:
                 "Agora é ir lá pro ap e pagar a taxa pra ela."
 
                 python:
-                    if renpy.android:
-                        casa = PythonSDLActivity.pegaCasa()
+                    casa = PythonSDLActivity.pegaCasa()
 
                 if not casa:
 
@@ -3246,18 +3250,19 @@ label cenario_boutique:
     "Atendente" "Certo. Fique à vontade."
 
 
+#########################################################
+label menu_roupa:
 
-    label menu_roupa:
+    python:
+        # Atualiza o dinheiro e os itens tanto no Android
+        # quanto no Windows pelo adaptador local.
+        cash = PythonSDLActivity.pegaCash()
+        roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+        roupa_blazer = PythonSDLActivity.pegaBlazer()
 
-        python:
-            if renpy.android:
-                cash = PythonSDLActivity.pegaCash()
-                roupa_blacktie = PythonSDLActivity.pegaBlacktie()
-                roupa_blazer = PythonSDLActivity.pegaBlazer()
+    scene boutique geral with Dissolve(1.0)
 
-        scene boutique geral with Dissolve(1.0)
-
-        "Certo. Deixa eu ver o que vou olhar aqui hoje."
+    "Certo. Deixa eu ver o que vou olhar aqui hoje."
 
     call screen escolhe_roupa
 
@@ -3436,8 +3441,7 @@ label roupa_blazer:
                 "Hmm..."
 
                 python:
-                    if renpy.android:
-                        cash = PythonSDLActivity.pegaCash()
+                    cash = PythonSDLActivity.pegaCash()
 
                 "Quanto que eu tenho mesmo?"
 
@@ -3461,13 +3465,28 @@ label roupa_blazer:
 
                     mc normal "Perfeito."
 
-                    python:
-                        if renpy.android:
-                            cash = PythonSDLActivity.pegaCash()
+                    # python:
+                    #     if renpy.android:
+                    #         cash = PythonSDLActivity.pegaCash()
                             
-                            if cash >= 250:
+                    #         if cash >= 250:
                                 
-                                PythonSDLActivity.compraBlazer()
+                    #             PythonSDLActivity.compraBlazer()
+                    python:
+                        cash = PythonSDLActivity.pegaCash()
+
+                        if cash >= 250:
+                            compra_ok = PythonSDLActivity.compraBlazer()
+                            cash = PythonSDLActivity.pegaCash()
+                            roupa_blazer = PythonSDLActivity.pegaBlazer()
+                        else:
+                            compra_ok = False
+
+                    if not compra_ok:
+
+                        "Não foi possível concluir a compra."
+
+                        jump roupa_blazer_menu
 
                     $ renpy.block_rollback()
 
@@ -3522,8 +3541,7 @@ label roupa_blazer:
                             "..."
 
                             python:
-                                if renpy.android:
-                                    cash = PythonSDLActivity.pegaCash()
+                                cash = PythonSDLActivity.pegaCash()
 
                             "..."
 
@@ -3706,8 +3724,7 @@ label roupa_blacktie:
                     "Hmm..."
 
                     python:
-                        if renpy.android:
-                            cash = PythonSDLActivity.pegaCash()
+                        cash = PythonSDLActivity.pegaCash()
 
                     "Quanto que eu tenho mesmo?"
 
@@ -3731,13 +3748,30 @@ label roupa_blacktie:
 
                         mc normal "Perfeito."
 
-                        python:
-                            if renpy.android:
-                                cash = PythonSDLActivity.pegaCash()
+                        # python:
+                        #     if renpy.android:
+                        #         cash = PythonSDLActivity.pegaCash()
                                 
-                                if cash >= 1000:
+                        #         if cash >= 1000:
                                     
-                                    PythonSDLActivity.compraBlacktie()
+                        #             PythonSDLActivity.compraBlacktie()
+                        python:
+                            # Obtém o saldo da implementação Android ou Windows.
+                            cash = PythonSDLActivity.pegaCash()
+
+                            if cash >= 1000:
+                                compra_ok = PythonSDLActivity.compraBlacktie()
+
+                                # Atualiza imediatamente as variáveis usadas pelo inventário.
+                                cash = PythonSDLActivity.pegaCash()
+                                roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+
+                            else:
+                                compra_ok = False
+
+                        if compra_ok is not True:
+                            "Compra nao concluida."
+                            jump roupa_blacktie
 
                         $ renpy.block_rollback()
 
@@ -3814,8 +3848,7 @@ label roupa_blacktie:
                                 "..."
 
                                 python:
-                                    if renpy.android:
-                                        cash = PythonSDLActivity.pegaCash()
+                                    cash = PythonSDLActivity.pegaCash()
 
                                 "..."
 
