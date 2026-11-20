@@ -111,13 +111,12 @@ screen menu_celular_relogio():
     modal True
 
     python:
-        if renpy.android:
-            fnext = PythonSDLActivity.pegaFNext()
-            epnext = PythonSDLActivity.pegaEPNext()
-            masnext = PythonSDLActivity.pegaMasNext()
-            tbnext = PythonSDLActivity.pegaTBNext()
-            mtnext = PythonSDLActivity.pegaMTNext()
-            tlnext = PythonSDLActivity.pegaTLNext()
+        fnext = PythonSDLActivity.pegaFNext()
+        epnext = PythonSDLActivity.pegaEPNext()
+        masnext = PythonSDLActivity.pegaMasNext()
+        tbnext = PythonSDLActivity.pegaTBNext()
+        mtnext = PythonSDLActivity.pegaMTNext()
+        tlnext = PythonSDLActivity.pegaTLNext()
 
     imagemap:
 
@@ -422,14 +421,13 @@ screen celular_mc():
     predict False
 
     python:
-        if renpy.android:
-            persistent.coins = PythonSDLActivity.pegaMoedas(0)
-            cash = PythonSDLActivity.pegaCash()
-            mc_fisico = PythonSDLActivity.pegaFpontos()
-            bao_pontos = PythonSDLActivity.pegaBao()
+        persistent.coins = PythonSDLActivity.pegaMoedas(0)
+        cash = PythonSDLActivity.pegaCash()
+        mc_fisico = PythonSDLActivity.pegaFpontos()
+        bao_pontos = PythonSDLActivity.pegaBao()
             
-            if userlogado:
-                useremail = PythonSDLActivity.pegaEmail()
+        if userlogado:
+            useremail = PythonSDLActivity.pegaEmail()
 
     imagemap:
 
