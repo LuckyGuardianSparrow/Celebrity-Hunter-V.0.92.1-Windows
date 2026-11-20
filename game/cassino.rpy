@@ -3,8 +3,7 @@ label cassino_entrada:
     if diana_e7 == "pauta":
 
         python:
-            if renpy.android:
-                roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
 
         "Tá na hora da verdade."
 
@@ -121,9 +120,8 @@ label cassino_entrada:
             jump call_cidade
 
     python:
-        if renpy.android:
-            roupa_blacktie = PythonSDLActivity.pegaBlacktie()
-            roupa_blazer = PythonSDLActivity.pegaBlazer()
+        roupa_blacktie = PythonSDLActivity.pegaBlacktie()
+        roupa_blazer = PythonSDLActivity.pegaBlazer()
 
     "Com qual traje eu vou no cassino hoje?"
 
@@ -645,9 +643,8 @@ label cassino_blackjack:
 label slots_minigame_pre:
 
     python:
-        if renpy.android:
-            credito = PythonSDLActivity.pegaCredito()
-            credito_total = PythonSDLActivity.pegaCreditoTotal()
+        credito = PythonSDLActivity.pegaCredito()
+        credito_total = PythonSDLActivity.pegaCreditoTotal()
 
     $ credito_atual = credito_total
 
@@ -707,9 +704,8 @@ label slots_minigame:
 
 
     python:
-        if renpy.android:
-            credito = PythonSDLActivity.pegaCredito()
-            credito_total = PythonSDLActivity.pegaCreditoTotal()
+        credito = PythonSDLActivity.pegaCredito()
+        credito_total = PythonSDLActivity.pegaCreditoTotal()
 
     $ credito_ganho = credito_total - credito_atual
     $ credito_falta = credito_gold - credito_total
@@ -958,8 +954,7 @@ label slots_minigame:
         "Eu tenho [credito] de crédito no meu cartão para jogar."
 
     python:
-        if renpy.android:
-            PythonSDLActivity.setaSalvado()
+        PythonSDLActivity.setaSalvado()
 
     menu:
 
@@ -1035,16 +1030,14 @@ label slots_minigame:
     $ renpy.block_rollback()
 
     python:
-        if renpy.android:
-            PythonSDLActivity.salvaJogo()
+        PythonSDLActivity.salvaJogo()
 
     play sound "audio/som_29_slot1.mp3"
 
     $ renpy.pause(delay=4, hard=True)
 
     python:
-        if renpy.android:
-            salvado = PythonSDLActivity.pegaSalvado()
+        salvado = PythonSDLActivity.pegaSalvado()
 
     if not salvado:
 
@@ -1356,6 +1349,39 @@ label slots_resultado:
 
 label slots_conta:
 
+    if not renpy.android:
+
+        $ aposta = max(0, int(aposta or 0))
+        $ credito = PythonSDLActivity.pegaCredito()
+        $ ganhos = 0
+        $ slots_ganhou = False
+
+        if aposta > 0 and credito >= aposta:
+
+            $ slot_result1 = "sete"
+            $ slot_result2 = "sete"
+            $ slot_result3 = "sete"
+            $ ganhos = aposta * 5
+            $ credito_resultado = PythonSDLActivity.addCredito(ganhos, aposta)
+
+            if credito_resultado is not False:
+                $ credito = credito_resultado
+                $ credito_total = PythonSDLActivity.pegaCreditoTotal()
+                $ slots_ganhou = True
+            else:
+                $ slot_result1 = ""
+                $ slot_result2 = ""
+                $ slot_result3 = ""
+                $ ganhos = 0
+
+        else:
+            $ slot_result1 = ""
+            $ slot_result2 = ""
+            $ slot_result3 = ""
+
+        $ salvado = PythonSDLActivity.salvaJogo()
+        return
+
     $ randslot = 0
 
     if persistent.slot_controle > 5:
@@ -1598,10 +1624,9 @@ label cassino_casher:
         $ show_quick_menu = False
 
         python:
-            if renpy.android:
-                credito_total = PythonSDLActivity.pegaCreditoTotal()
-                credito = PythonSDLActivity.pegaCredito()
-                cash = PythonSDLActivity.pegaCash()
+            credito_total = PythonSDLActivity.pegaCreditoTotal()
+            credito = PythonSDLActivity.pegaCredito()
+            cash = PythonSDLActivity.pegaCash()
 
         $ renpy.block_rollback()
 
@@ -1640,9 +1665,16 @@ label cassino_casher:
             python:
                 if renpy.android:
                     PythonSDLActivity.compraCredito(ganhos)
+                    compra_credito_ok = True
                 else:
-                    credito += ganhos
-                    cash -= ganhos
+                    compra_credito_ok = PythonSDLActivity.compraCredito(ganhos)
+                if compra_credito_ok is True:
+                    credito = PythonSDLActivity.pegaCredito()
+                    cash = PythonSDLActivity.pegaCash()
+
+            if compra_credito_ok is not True:
+                "Pagamento nao concluido."
+                jump casher_menu
 
             $ renpy.block_rollback()
 
@@ -1685,9 +1717,16 @@ label cassino_casher:
             python:
                 if renpy.android:
                     PythonSDLActivity.trocaCredito(ganhos)
+                    troca_credito_ok = True
                 else:
-                    credito -= ganhos
-                    cash += ganhos
+                    troca_credito_ok = PythonSDLActivity.trocaCredito(ganhos)
+                if troca_credito_ok is True:
+                    credito = PythonSDLActivity.pegaCredito()
+                    cash = PythonSDLActivity.pegaCash()
+
+            if troca_credito_ok is not True:
+                "Pagamento nao concluido."
+                jump casher_menu
 
             $ renpy.block_rollback()
 
@@ -1784,8 +1823,7 @@ label cassino_casher:
 
 
                     python:
-                        if renpy.android:
-                            credito_total = PythonSDLActivity.pegaCreditoTotal()
+                        credito_total = PythonSDLActivity.pegaCreditoTotal()
 
                     mc desconfiado "E essa história de Silver, Gold e Platinum Cards?"
 
@@ -2208,9 +2246,8 @@ label cassino_ana:
 
 
             python:
-                if renpy.android:
-                    credito = PythonSDLActivity.pegaCredito()
-                    credito_total = PythonSDLActivity.pegaCreditoTotal()
+                credito = PythonSDLActivity.pegaCredito()
+                credito_total = PythonSDLActivity.pegaCreditoTotal()
 
             $ credito_ganho = credito_total - credito_atual
             $ credito_falta = credito_gold - credito_total
@@ -2657,9 +2694,8 @@ label cassino_ana:
             "..."
 
             python:
-                if renpy.android:
-                    credito = PythonSDLActivity.pegaCredito()
-                    credito_total = PythonSDLActivity.pegaCreditoTotal()
+                credito = PythonSDLActivity.pegaCredito()
+                credito_total = PythonSDLActivity.pegaCreditoTotal()
 
             $ credito_ganho = credito_total - credito_atual
             $ credito_falta = credito_gold - credito_total
