@@ -857,7 +857,7 @@ label dm_j3_calculo_sempre_sucesso:
 
 
 # Conta local Windows. Sem autenticacao externa.
-define DM_EMAIL_CONTA_WINDOWS = "mafra_360@hotmail.com"
+define DM_EMAIL_CONTA_WINDOWS = "delean@mafra.com.br"
 define DM_UID_CONTA_WINDOWS = "windows_local_mafra_360"
 default dm_erro_conta_windows = ""
 default persistent.dm_userlogado_windows = False
@@ -1056,3 +1056,49 @@ screen celular_mc_copia():
                     imagebutton auto "extra/botao_login_%s.png" xalign 0.5 xanchor 0.5 action Call("fazer_login")
             else:
                 use dm_bloco_conta_windows
+
+
+# ============================================================
+# NOME FIXO DO PROTAGONISTA NO WINDOWS
+# ============================================================
+#
+# Permite usar normalmente as telas originais de escolha e
+# confirmação. Assim que as telas fecharem, o nome volta para:
+#
+# Nome: Delean
+# Sobrenome: Mafra
+#
+# Também corrige saves antigos com outro nome.
+# ============================================================
+
+# ============================================================
+# NOME FIXO DO PROTAGONISTA NO WINDOWS
+# ============================================================
+
+init 1100 python:
+
+    def dm_manter_nome_protagonista_windows():
+        if renpy.android:
+            return
+
+        if renpy.get_screen("text_input_screen") is not None:
+            return
+
+        if renpy.get_screen("confirmar_nome") is not None:
+            return
+
+        store.mcpnome = "Delean"
+        store.mcsnome = "Mafra"
+
+
+    if (
+        dm_manter_nome_protagonista_windows
+        not in config.overlay_functions
+    ):
+        config.overlay_functions.append(
+            dm_manter_nome_protagonista_windows
+        )
+
+
+# Nome exibido antes da confirmação do nome completo.
+define mcantes = Character("Delean", image="mc")
