@@ -16,8 +16,7 @@ label trabalho_inicio:
     $ renpy.choice_for_skipping()
 
     python:
-        if renpy.android:
-            tbtempo = PythonSDLActivity.checkTBtempoNext()
+        tbtempo = PythonSDLActivity.checkTBtempoNext()
 
     "..."
 
@@ -53,8 +52,7 @@ label trabalho_inicio:
             PythonSDLActivity.registraEvento("trabalho_bar","fabricio","personagem")
 
     python:
-        if renpy.android:
-            PythonSDLActivity.setTBtempoNext()
+        PythonSDLActivity.setTBtempoNext()
 
     if tempo == 1:
 
@@ -477,10 +475,9 @@ label trabalho_bar_finalizar:
         mc normal "Até, [gar]!"
 
     python:
-        if renpy.android:
-            PythonSDLActivity.ganhaCash(tb_cash)
-            cash = PythonSDLActivity.pegaCash()
-            tb_mais += 1
+        PythonSDLActivity.ganhaCash(tb_cash)
+        cash = PythonSDLActivity.pegaCash()
+        tb_mais += 1
 
     $ renpy.block_rollback()
 
