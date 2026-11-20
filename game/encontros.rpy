@@ -349,9 +349,8 @@ label encontro_priscila:
     call checa_tempo from _call_checa_tempo_3
 
     python:
-        if renpy.android:
-            etempo = PythonSDLActivity.checkEPtempoNext()
-            ep_pontos = PythonSDLActivity.pegaEPpontos()
+        etempo = PythonSDLActivity.checkEPtempoNext()
+        ep_pontos = PythonSDLActivity.pegaEPpontos()
 
     mc normal "Tava pensando aqui... Quer fazer alguma coisa comigo agora?"
 
@@ -379,8 +378,7 @@ label encontro_priscila:
         p lecionando "Use o app Relógio no celular do [mc] para ver quando o próximo encontro estará disponível"
 
         python:
-            if renpy.android:
-                persistent.coins = PythonSDLActivity.pegaMoedas(0)
+            persistent.coins = PythonSDLActivity.pegaMoedas(0)
 
         p "Ou você pode liberar o próximo encontro agora mesmo usando Celebrity Coins"
 
@@ -393,8 +391,7 @@ label encontro_priscila:
 
 
                     python:
-                        if renpy.android:
-                            PythonSDLActivity.avancaEPTempo()
+                        PythonSDLActivity.avancaEPTempo()
 
                     $ renpy.block_rollback()
 
@@ -1024,9 +1021,8 @@ label encontro_priscila:
     $ show_quick_menu = False
 
     python:
-        if renpy.android:
-            ep_pontos = PythonSDLActivity.pegaEPpontos()
-            PythonSDLActivity.setEPtempoNext()
+        ep_pontos = PythonSDLActivity.pegaEPpontos()
+        PythonSDLActivity.setEPtempoNext()
 
     if nandom == 1:
 
@@ -1093,17 +1089,16 @@ label encontro_priscila:
         $ renpy.block_rollback()
 
         python:
-            if renpy.android:
-                ep_p_1 = PythonSDLActivity.pegaEPp1()
-                ep_p_2 = PythonSDLActivity.pegaEPp2()
-                ep_p_3 = PythonSDLActivity.pegaEPp3()
-                ep_p_4 = PythonSDLActivity.pegaEPp4()
-                ep_p_5 = PythonSDLActivity.pegaEPp5()
-                ep_p_6 = PythonSDLActivity.pegaEPp6()
-                ep_p_7 = PythonSDLActivity.pegaEPp7()
-                ep_p_8 = PythonSDLActivity.pegaEPp8()
-                ep_p_9 = PythonSDLActivity.pegaEPp9()
-                ep_p_10 = PythonSDLActivity.pegaEPp10()
+            ep_p_1 = PythonSDLActivity.pegaEPp1()
+            ep_p_2 = PythonSDLActivity.pegaEPp2()
+            ep_p_3 = PythonSDLActivity.pegaEPp3()
+            ep_p_4 = PythonSDLActivity.pegaEPp4()
+            ep_p_5 = PythonSDLActivity.pegaEPp5()
+            ep_p_6 = PythonSDLActivity.pegaEPp6()
+            ep_p_7 = PythonSDLActivity.pegaEPp7()
+            ep_p_8 = PythonSDLActivity.pegaEPp8()
+            ep_p_9 = PythonSDLActivity.pegaEPp9()
+            ep_p_10 = PythonSDLActivity.pegaEPp10()
 
         jump encontro_priscila_pergunta
 
@@ -1486,8 +1481,7 @@ label encontro_priscila:
 
 
         python:
-            if renpy.android:
-                PythonSDLActivity.setEPtempoNext()
+            PythonSDLActivity.setEPtempoNext()
 
         mc normal "Hoje eu vou querer que você me fale algo sobre você."
 
@@ -1698,10 +1692,9 @@ label encontro_priscila:
             c "Tem razão."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp1()
-                    PythonSDLActivity.ganhaEPpontos()
-                    PythonSDLActivity.setEPtempoNext()
+                PythonSDLActivity.acertaEPp1()
+                PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.setEPtempoNext()
 
         elif pe_num == 2:
 
@@ -1716,9 +1709,8 @@ label encontro_priscila:
             mc normal "Bom saber."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp2()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp2()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 3:
@@ -1730,9 +1722,8 @@ label encontro_priscila:
             "Graças a Deus eu acertei essa."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp3()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp3()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 4:
@@ -1748,9 +1739,8 @@ label encontro_priscila:
             c "Ah, seu xavequeiro..."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp4()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp4()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 5:
@@ -1770,9 +1760,8 @@ label encontro_priscila:
             c "Obrigada!"
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp5()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp5()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 6:
@@ -1788,9 +1777,8 @@ label encontro_priscila:
             c "Vamos ver. Vou ficar de olho."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp6()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp6()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 7:
@@ -1806,9 +1794,8 @@ label encontro_priscila:
             c "Olha aqui uma foto dele..."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp7()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp7()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 8:
@@ -1822,9 +1809,8 @@ label encontro_priscila:
             c "Obrigada, [mc]."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp8()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp8()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 9:
@@ -1840,9 +1826,8 @@ label encontro_priscila:
             mc normal "Interessante..."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp9()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp9()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         elif pe_num == 10:
@@ -1872,15 +1857,13 @@ label encontro_priscila:
             mc normal "Relaxa. Falar sobre outras coisas de vez em quando não vai matar ninguém."
 
             python:
-                if renpy.android:
-                    PythonSDLActivity.acertaEPp10()
-                    PythonSDLActivity.ganhaEPpontos()
+                PythonSDLActivity.acertaEPp10()
+                PythonSDLActivity.ganhaEPpontos()
 
 
         python:
-            if renpy.android:
-                PythonSDLActivity.registraEvento("encontro_priscila","priscila","personagem")
-                ep_pontos = PythonSDLActivity.pegaEPpontos()
+            PythonSDLActivity.registraEvento("encontro_priscila","priscila","personagem")
+            ep_pontos = PythonSDLActivity.pegaEPpontos()
 
         $ renpy.block_rollback()
 
@@ -1889,8 +1872,7 @@ label encontro_priscila:
     label encontro_priscila_errou:
 
         python:
-            if renpy.android:
-                PythonSDLActivity.setEPtempoNext()
+            PythonSDLActivity.setEPtempoNext()
 
         $ renpy.block_rollback()
 
@@ -2591,7 +2573,7 @@ label priscila_encontro_1vez:
     python:
         if renpy.android:
             PythonSDLActivity.registraEvento("priscila_encontro_1vez","priscila","personagem")
-            PythonSDLActivity.setEPtempoNext()
+        PythonSDLActivity.setEPtempoNext()
 
     $ renpy.block_rollback()
 
