@@ -7216,7 +7216,11 @@ label priscila_evento4:
                                                 mc "Ele já tá pronto pra você..."
 
                                         mc "Sente ele gostoso."
-
+                                        image ani13 = Movie(
+                                                channel="dm_ani13",
+                                                play="images/ani13.webm",
+                                                size=(1280, 720)
+                                        )
                                         scene black with dissolve
 
                                         scene ani13 with Dissolve(1.0)
