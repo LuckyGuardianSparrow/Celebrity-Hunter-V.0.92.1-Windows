@@ -1723,7 +1723,7 @@ label start:
 
                             mc angustiado "Mas.. mas..."
 
-                            jump end_y
+                            #jump end_y
                         "Eu... na redação da revista...":
 
 
