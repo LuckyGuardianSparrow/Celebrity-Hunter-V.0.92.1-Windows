@@ -2208,6 +2208,8 @@ layeredimage ape_geral:
 
     if tempo <= 1:
         "images/fundo_dia.jpg"
+        
+
 
 
     elif tempo == 2:
