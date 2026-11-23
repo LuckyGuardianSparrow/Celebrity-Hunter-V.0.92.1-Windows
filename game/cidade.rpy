@@ -2820,7 +2820,7 @@ label academia_treino:
             $ proibido_salvar = True
             $ show_quick_menu = False
 
-            "Bora lá!"
+            "Bora lá!"   
 
         python:
             PythonSDLActivity.setMTtempoNext()
@@ -2925,7 +2925,7 @@ label academia_treino_finalizar:
     $ tempo += 1
 
     jump cidade_academia
-
+##################################################################
 screen cidade_tela():
     tag cidade
 
