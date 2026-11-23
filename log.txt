@@ -1,34 +1,34 @@
-2026-11-20 01:40:21 UTC
+2026-11-23 02:27:57 UTC
 Windows-10-10.0.19045-SP0
 Ren'Py 8.5.0.25111603
 
-Early init took 129 ms
-Loading error handling took 112 ms
-Loading script took 10578 ms
-Loading save slot metadata took 297 ms
+Early init took 109 ms
+Loading error handling took 62 ms
+Loading script took 1779 ms
+Loading save slot metadata took 281 ms
 Loading persistent took 0 ms
 Set script version to: (7, 3, 5)
-Running init code took 372 ms
-Loading analysis data took 17 ms
-Analyze and compile ATL took 50 ms
-Reloading save slot metadata took 60 ms
+Running init code took 162 ms
+Loading analysis data took 16 ms
+Analyze and compile ATL took 16 ms
+Reloading save slot metadata took 62 ms
 Dump and make backups took 0 ms
 Cleaning cache took 0 ms
 Making clean stores took 0 ms
-Initial gc took 131 ms
+Initial gc took 94 ms
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: b"Couldn't load nvlib." (can be ignored)
-Creating interface object took 8 ms
-Init translation took 2 ms
+Creating interface object took 0 ms
+Init translation took 0 ms
 Cleaning stores took 0 ms
 Load screen analysis took 0 ms
-Analyze screens took 38 ms
-Save screen analysis took 63 ms
+Analyze screens took 16 ms
+Save screen analysis took 31 ms
 Save pyanalysis took 0 ms
-Save bytecode took 124 ms
+Save bytecode took 63 ms
 Running _start took 0 ms
-Interface start took 1763 ms
+Interface start took 1246 ms
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -43,14 +43,2597 @@ Maximum texture size: 4096x4096
 Could not open 'cache/shaders.txt':
 Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
-Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/garotas.rpy", line 2004, in script call
+    $ renpy.pause()
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2101, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+[Previous line repeated 2 more times]
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+[Previous line repeated 5 more times]
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+[Previous line repeated 2 more times]
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 5 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 3 more times]
+  File "game/cassino.rpy", line 2468, in script call
+    call ana_conversa from _call_ana_conversa
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/julia.rpy", line 7213, in script call
+    call j3_avaliacao from _call_j3_avaliacao_2
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 8 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 18 more times]
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/garotas.rpy", line 2004, in script call
+    $ renpy.pause()
+  File "game/garotas.rpy", line 2101, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+[Previous line repeated 5 more times]
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 4 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+[Previous line repeated 1 more time]
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/cassino.rpy", line 2480, in script call
+    menu:
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 15 more times]
+  File "game/garotas.rpy", line 2004, in script call
+    $ renpy.pause()
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2101, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+[Previous line repeated 3 more times]
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 5 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 5 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+[Previous line repeated 1 more time]
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 3 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 3 more times]
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 12 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 4 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 8 more times]
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 34 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 21 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 6838, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/cassino.rpy", line 2484, in script call
+    call ana_sexy from _call_ana_sexy_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 18 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/julia.rpy", line 23520, in script call
+    call checa_final from _call_checa_final_4
+  File "game/comandos.rpy", line 1657, in script call
+    call end_a from _call_end_a
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 2727, in script
+    mc zerado "Por que você tem que falar assim?"
+  File "renpy/ast.py", line 2923, in execute
+    Say.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "renpy/ast.py", line 991, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/exports/sayexports.py", line 129, in say
+    who(what, *args, **kwargs)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1543, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1198, in do_display
+    display_say(who, what, self.do_show, **display_args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 888, in display_say
+    rv = renpy.ui.interact(mouse="say", type=type, roll_forward=roll_forward)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/ui.py", line 304, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/core.py", line 2117, in interact
+    repeat, rv = self.interact_core(
+                 ~~~~~~~~~~~~~~~~~~^
+        preloads=preloads,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "renpy/display/core.py", line 3203, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/behavior.py", line 559, in event
+    rv = run(action)
+         ~~~^^^^^^^^
+  File "renpy/display/behavior.py", line 411, in run
+    return action(*args, **kwargs)
+           ~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/common/00action_other.rpy", line 618, in __call__
+    rv = self.callable(*self.args, **self.kwargs)
+         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/zz_windows_mods.rpy", line 1629, in dm_forcar_voltar_windows
+    renpy.rollback(
+    ~~~~~~~~~~~~~~^
+        force=True,
+        ^^^^^^^^^^^
+    ...<3 lines>...
+        abnormal=True
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/exports/rollbackexports.py", line 233, in rollback
+    renpy.game.log.rollback(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        checkpoints, greedy=greedy, label=label, force=(force is True), abnormal=abnormal, current_label=current_label
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/rollback.py", line 951, in rollback
+    self.load_failed()
+    ~~~~~~~~~~~~~~~~^^
+  File "renpy/rollback.py", line 865, in load_failed
+    raise Exception(
+        "Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?"
+    )
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+While running game code:
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/garotas.rpy", line 2004, in script call
+    $ renpy.pause()
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2101, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+[Previous line repeated 2 more times]
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+[Previous line repeated 5 more times]
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+[Previous line repeated 2 more times]
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 5 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 3 more times]
+  File "game/cassino.rpy", line 2468, in script call
+    call ana_conversa from _call_ana_conversa
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/julia.rpy", line 7213, in script call
+    call j3_avaliacao from _call_j3_avaliacao_2
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 8 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 18 more times]
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/garotas.rpy", line 2004, in script call
+    $ renpy.pause()
+  File "game/garotas.rpy", line 2101, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+[Previous line repeated 5 more times]
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 4 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+[Previous line repeated 1 more time]
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/cassino.rpy", line 2480, in script call
+    menu:
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 15 more times]
+  File "game/garotas.rpy", line 2004, in script call
+    $ renpy.pause()
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2101, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+  File "game/garotas.rpy", line 2079, in script call
+    "..."
+[Previous line repeated 3 more times]
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 5 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 5 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+[Previous line repeated 1 more time]
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 3 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 3 more times]
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 12 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 4 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 8 more times]
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 34 more times]
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 21 more times]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1558, in script call
+    call lamen_ingredientes from _call_lamen_ingredientes
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 1873, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7819, in script call
+    pause
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 6838, in script call
+    pause
+  File "game/cenarios.rpy", line 7803, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/chinatown.rpy", line 7943, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cassino.rpy", line 2488, in script call
+    call ana_conversa from _call_ana_conversa_1
+  File "game/cassino.rpy", line 2484, in script call
+    call ana_sexy from _call_ana_sexy_1
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3095, in script call
+    pause
+  File "game/chinatown.rpy", line 3108, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3133, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3080, in script call
+    pause
+  File "game/chinatown.rpy", line 3121, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 18 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/julia.rpy", line 23520, in script call
+    call checa_final from _call_checa_final_4
+  File "game/comandos.rpy", line 1657, in script call
+    call end_a from _call_end_a
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 1 more time]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/cenarios.rpy", line 7787, in script call
+    pause
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+[Previous line repeated 2 more times]
+  File "game/cenarios.rpy", line 7773, in script call
+    $ renpy.pause()
+  File "game/comandos.rpy", line 1336, in script call
+    call screen cidade
+  File "game/cenarios.rpy", line 2727, in script
+    mc zerado "Por que você tem que falar assim?"
+  File "game/zz_windows_mods.rpy", line 1629, in dm_forcar_voltar_windows
+    renpy.rollback(
+    ~~~~~~~~~~~~~~^
+        force=True,
+        ^^^^^^^^^^^
+    ...<3 lines>...
+        abnormal=True
+        ^^^^^^^^^^^^^
+    )
+    ^
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+Cleaning stores took 0 ms
+Load screen analysis took 207 ms
+Analyze screens took 0 ms
+Running _start took 22 ms
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "renpy/ast.py", line 1187, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1273, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+    ~~~~~~~~~~~^^
+  File "renpy/ui.py", line 304, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/core.py", line 2117, in interact
+    repeat, rv = self.interact_core(
+                 ~~~~~~~~~~~~~~~~~~^
+        preloads=preloads,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "renpy/display/core.py", line 3203, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/behavior.py", line 559, in event
+    rv = run(action)
+         ~~~^^^^^^^^
+  File "renpy/display/behavior.py", line 411, in run
+    return action(*args, **kwargs)
+           ~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/common/00action_other.rpy", line 618, in __call__
+    rv = self.callable(*self.args, **self.kwargs)
+         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/zz_windows_mods.rpy", line 1629, in dm_forcar_voltar_windows
+    renpy.rollback(
+    ~~~~~~~~~~~~~~^
+        force=True,
+        ^^^^^^^^^^^
+    ...<3 lines>...
+        abnormal=True
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/exports/rollbackexports.py", line 233, in rollback
+    renpy.game.log.rollback(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        checkpoints, greedy=greedy, label=label, force=(force is True), abnormal=abnormal, current_label=current_label
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/rollback.py", line 951, in rollback
+    self.load_failed()
+    ~~~~~~~~~~~~~~~~^^
+  File "renpy/rollback.py", line 865, in load_failed
+    raise Exception(
+        "Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?"
+    )
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+While running game code:
+  File "game/zz_windows_mods.rpy", line 1629, in dm_forcar_voltar_windows
+    renpy.rollback(
+    ~~~~~~~~~~~~~~^
+        force=True,
+        ^^^^^^^^^^^
+    ...<3 lines>...
+        abnormal=True
+        ^^^^^^^^^^^^^
+    )
+    ^
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "renpy/ast.py", line 1187, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1273, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+    ~~~~~~~~~~~^^
+  File "renpy/ui.py", line 304, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/core.py", line 2117, in interact
+    repeat, rv = self.interact_core(
+                 ~~~~~~~~~~~~~~~~~~^
+        preloads=preloads,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "renpy/display/core.py", line 3203, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/behavior.py", line 559, in event
+    rv = run(action)
+         ~~~^^^^^^^^
+  File "renpy/display/behavior.py", line 411, in run
+    return action(*args, **kwargs)
+           ~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/common/00action_other.rpy", line 618, in __call__
+    rv = self.callable(*self.args, **self.kwargs)
+         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/zz_windows_mods.rpy", line 1629, in dm_forcar_voltar_windows
+    renpy.rollback(
+    ~~~~~~~~~~~~~~^
+        force=True,
+        ^^^^^^^^^^^
+    ...<3 lines>...
+        abnormal=True
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/exports/rollbackexports.py", line 233, in rollback
+    renpy.game.log.rollback(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        checkpoints, greedy=greedy, label=label, force=(force is True), abnormal=abnormal, current_label=current_label
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/rollback.py", line 951, in rollback
+    self.load_failed()
+    ~~~~~~~~~~~~~~~~^^
+  File "renpy/rollback.py", line 865, in load_failed
+    raise Exception(
+        "Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?"
+    )
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "renpy/common/00start.rpy", line 297, in script
+    python:
+  File "renpy/ast.py", line 1187, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1273, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/common/00start.rpy", line 299, in <module>
+    renpy.call_in_new_context(_restart[2])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "renpy/game.py", line 372, in call_in_new_context
+    return renpy.execution.run_context(False)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "renpy/execution.py", line 1027, in run_context
+    context.run()
+    ~~~~~~~~~~~^^
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "renpy/display/error.py", line 135, in report_exception
+    renpy.game.invoke_in_new_context(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        call_exception_screen,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ignore_action=ignore_action,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/game.py", line 301, in invoke_in_new_context
+    return callable(*args, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/display/error.py", line 44, in call_exception_screen
+    return renpy.ui.interact(mouse="screen", type="screen", suppress_overlay=True, suppress_underlay=True)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/ui.py", line 304, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/core.py", line 2117, in interact
+    repeat, rv = self.interact_core(
+                 ~~~~~~~~~~~~~~~~~~^
+        preloads=preloads,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "renpy/display/core.py", line 3203, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/screen.py", line 805, in event
+    rv = self.child.event(ev, x, y, st)
+         ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1510, in event
+    rv = super(Window, self).event(ev, x, y, st)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 273, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 273, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/layout.py", line 1281, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/behavior.py", line 1185, in event
+    return handle_click(self.clicked)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "renpy/display/behavior.py", line 1107, in handle_click
+    rv = run(action)
+         ~~~^^^^^^^^
+  File "renpy/display/behavior.py", line 411, in run
+    return action(*args, **kwargs)
+           ~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/display/error.py", line 51, in rollback_action
+    renpy.exports.rollback(force=True)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "renpy/exports/rollbackexports.py", line 233, in rollback
+    renpy.game.log.rollback(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        checkpoints, greedy=greedy, label=label, force=(force is True), abnormal=abnormal, current_label=current_label
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "renpy/rollback.py", line 951, in rollback
+    self.load_failed()
+    ~~~~~~~~~~~~~~~~^^
+  File "renpy/rollback.py", line 865, in load_failed
+    raise Exception(
+        "Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?"
+    )
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+While running game code:
+  File "game/zz_windows_mods.rpy", line 1629, in dm_forcar_voltar_windows
+    renpy.rollback(
+    ~~~~~~~~~~~~~~^
+        force=True,
+        ^^^^^^^^^^^
+    ...<3 lines>...
+        abnormal=True
+        ^^^^^^^^^^^^^
+    )
+    ^
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+During handling of the above exception, another exception occurred:
+
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+Cleaning stores took 2 ms
+Load screen analysis took 67 ms
+Analyze screens took 0 ms
+Running _start took 21 ms
 Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
 Maximum texture size: 4096x4096
 Screen sizes: virtual=(1280, 720) physical=(1920, 1017) drawable=(1920, 1017)
